@@ -11,10 +11,6 @@ main:
     conference: Under review at <strong>Artificial Intelligence Review</strong>
     pdf: https://arxiv.org/pdf/2610.19108
 
-  - title: "Differential Confidence Mapping: Reliable Calibration of LLMs via Contrastive Prompting & Graph"
-    authors: <strong>Masoud Jafaripour</strong>, S. Amini
-    conference: Under review
-
   - title: "The Evolving Landscape of LLM- and VLM-Integrated Reinforcement Learning"
     authors: Sheila Schoepp, <strong>Masoud Jafaripour*</strong>, Yingyue Cao*, Tianpei Yang, Fatemeh Abdollahi, Shadan Golestan, Zahin Sufiyan, Osmar R. Zaiane, Matthew E. Taylor (*Equal contribution)
     conference: International Joint Conference on Artificial Intelligence <strong>(IJCAI)</strong>, 2025, Montreal, Canada
