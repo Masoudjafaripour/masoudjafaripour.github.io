@@ -26,6 +26,12 @@
     color: #1c1c1c !important;
   }
 
+  /* Dark logos (Vector, EA) vanish on the dark page without a light backing. */
+  .experience-logo {
+    background-color: #fff;
+    padding: 1px;
+  }
+
   autocolor {
     color: var(--site-text);
   }

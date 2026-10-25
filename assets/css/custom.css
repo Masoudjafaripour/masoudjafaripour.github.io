@@ -194,6 +194,13 @@ hr.section-divider {
   line-height: 1.4;
 }
 
+.experience-logo {
+  width: 21px;
+  height: 21px;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
 .experience-org {
   font-weight: 600;
   line-height: 1.4;
