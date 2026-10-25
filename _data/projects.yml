@@ -1,0 +1,19 @@
+# Fields: title, description, page, code, report, featured.
+- title: Vibe-CADing
+  description: Conditional CAD generation and retrieval for a text-to-CAD design pipeline. An LLM writes a program that builds a 3D shape from a text prompt, and errors from failed runs are fed back until the output is valid.
+  page: https://masoudjafaripour.github.io/Vibe_CADing/
+  code: https://github.com/Masoudjafaripour/Vibe_CADing
+  report: https://masoudjafaripour.github.io/Vibe_CADing/media/vibe_cading_report.pdf
+  featured: true
+
+- title: nanochat-VLM
+  description: A minimal, hackable vision-language model built on Karpathy's nanochat, adding image understanding and multimodal chat.
+  code: https://github.com/Masoudjafaripour/nanochat-VLM
+
+- title: LM Agents
+  description: Post-training LLM agents with SFT, on-policy distillation, and RL fine-tuning on SWE-bench and multi-turn benchmarks.
+  code: https://github.com/Masoudjafaripour/LM_Agents
+
+- title: Embodied Distilled SMLM
+  description: Distilling a large teacher into a small vision-language model for efficient embodied spatial reasoning and action planning.
+  code: https://github.com/Masoudjafaripour/Embodied_Distilled_SMLM

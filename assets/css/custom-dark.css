@@ -1,0 +1,32 @@
+/* Dark palette for custom.css, loaded only when auto_dark_mode is on. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --site-bg: #20212b;
+    --site-text: #eeeff0;
+    --site-muted: #a8acb5;
+    --site-faint: #8a8e98;
+    --site-accent: #e3a56f;
+    --site-hover: #f3c99b;
+    --site-accent-tint: rgba(227, 165, 111, 0.10);
+    --site-accent-border: rgba(227, 165, 111, 0.38);
+    --site-rule: rgba(255, 255, 255, 0.10);
+    --site-btn-hover-text: #1c1c1c;
+  }
+
+  /* The theme sets these inside its own dark-mode block, so match it here. */
+  h1, h2, h3, h4, h5, h6, a {
+    color: var(--site-accent);
+  }
+
+  header .social-icons a {
+    color: var(--site-accent) !important;
+  }
+
+  header .social-icons a:hover {
+    color: #1c1c1c !important;
+  }
+
+  autocolor {
+    color: var(--site-text);
+  }
+}

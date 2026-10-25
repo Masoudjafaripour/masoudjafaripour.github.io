@@ -1,0 +1,20 @@
+# Newest first. Set milestone: true to highlight an item (new roles, defenses, awards).
+# text accepts inline HTML.
+- date: "Now"
+  milestone: true
+  text: I am a Research Intern at <i>Electronic Arts (EA)</i>, working on efficient language models for real-time reasoning and decision-making in games.
+
+- date: "2025"
+  text: Released <a href="https://masoudjafaripour.github.io/Vibe_CADing/">Vibe-CADing</a>, an open-source text-to-CAD pipeline where an LLM writes and repairs CAD programs.
+
+- date: "2025"
+  text: Our survey "The Evolving Landscape of LLM- and VLM-Integrated Reinforcement Learning" is accepted to <i>IJCAI 2025</i>.
+
+- date: "2025"
+  text: Our paper "Adaptive Iterative Feedback Prompting for Obstacle-Aware Path Planning via LLMs" is accepted to the <i>LM4Plan Workshop @ AAAI 2025</i>.
+
+- date: "Feb 25"
+  text: Our survey on LLM- and VLM-integrated RL is on <a href="https://arxiv.org/abs/2502.15214">arXiv</a>.
+
+- date: "Oct 24"
+  text: Our paper "Optimal Integration of Hybrid FES-Exoskeleton for Precise Knee Trajectory Control" appears at <i>IROS 2024</i>.

@@ -1,22 +1,26 @@
+# Fields: title, authors, conference (venue line), pdf, code, page, bibtex, notes, others.
+# All fields except title are optional.
 main:
 
-  - title: Continual Learning for Abdominal Multi-Organ and Tumor Segmentation
-    authors: Yixiao Zhang, Xinyi Li, Huimiao Chen, Alan Yuille, <strong>Yaoyao Liu*</strong>, Zongwei Zhou* (*Corresponding authors)
-    conference_short: MICCAI
-    conference: International Conference on Medical Image Computing and Computer-Assisted Intervention <strong>(MICCAI)</strong>, 2023.
-    pdf: https://arxiv.org/pdf/2306.00988.pdf
-    code: https://github.com/MrGiovanni/ContinualLearning
-    bibtex: https://bib.yliu.me/MICCAI23.txt
-    image: ./assets/img/teaser_example_2.png
-    notes: Early Accept
+  - title: "The Evolving Landscape of LLM- and VLM-Integrated Reinforcement Learning"
+    authors: Sheila Schoepp, <strong>Masoud Jafaripour</strong>, Yingyue Cao, Tianpei Yang, Fatemeh Abdollahi, Shadan Golestan, Zahin Sufiyan, Osmar R. Zaiane, Matthew E. Taylor
+    conference: International Joint Conference on Artificial Intelligence <strong>(IJCAI)</strong>, 2025
+    pdf: https://arxiv.org/pdf/2502.15214
+    code: https://github.com/Masoudjafaripour/FM_RL_Survey
 
-  - title: "Mnemonics Training: Multi-Class Incremental Learning without Forgetting"
-    authors: <strong>Yaoyao Liu</strong>, Yuting Su, An-An Liu, Bernt Schiele, Qianru Sun
-    conference_short: CVPR
-    conference: IEEE/CVF Conference on Computer Vision and Pattern Recognition <strong>(CVPR)</strong>, 2020.
-    pdf: https://arxiv.org/pdf/2002.10211.pdf
-    code: https://github.com/yaoyao-liu/class-incremental-learning/tree/main/mnemonics-training
-    page: https://class-il.mpi-inf.mpg.de/mnemonics/
-    bibtex: https://class-il.mpi-inf.mpg.de/mnemonics/
-    notes: Oral Presentation
-    image: ./assets/img/teaser_example.png
+  - title: "Adaptive Iterative Feedback Prompting for Obstacle-Aware Path Planning via LLMs"
+    authors: <strong>Masoud Jafaripour</strong>, Shadan Golestan, Shotaro Miwa, Yoshihiro Mitsuka, Osmar R. Zaiane
+    conference: LM4Plan Workshop @ AAAI Conference on Artificial Intelligence <strong>(AAAI)</strong>, 2025
+    pdf: https://openreview.net/pdf?id=M4rLudFbT2
+    code: https://github.com/Masoudjafaripour/AIFP
+
+  - title: "Optimal Integration of Hybrid FES-Exoskeleton for Precise Knee Trajectory Control"
+    authors: <strong>Masoud Jafaripour</strong>, Vivian K. Mushahwar, Mahdi Tavakoli
+    conference: IEEE/RSJ International Conference on Intelligent Robots and Systems <strong>(IROS)</strong>, 2024
+    pdf: https://www.ece.ualberta.ca/~tbs/pmwiki/pdf/Jafaripour-IROS-2024.pdf
+
+  - title: "Understanding Spatial Reasoning in Multimodal Large Language Models through Data and Evaluation"
+    conference: Under review
+
+  - title: "KV-aware Test-Time Scaling for Efficient Geometric and Spatial Reasoning in Multimodal LLMs"
+    conference: In progress

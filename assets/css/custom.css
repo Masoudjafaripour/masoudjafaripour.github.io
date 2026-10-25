@@ -1,0 +1,380 @@
+/* Site customizations layered on top of the Minimal Light theme.
+   Colors live in variables so custom-dark.css only has to redefine them. */
+
+:root {
+  --site-bg: #fbf8f3;
+  --site-text: #1f1f1f;
+  --site-muted: #666;
+  --site-faint: #888;
+  --site-accent: #4a1a2c;
+  --site-hover: #b5652a;
+  --site-accent-tint: rgba(74, 26, 44, 0.06);
+  --site-accent-border: rgba(74, 26, 44, 0.25);
+  --site-rule: rgba(128, 128, 128, 0.18);
+  --site-btn-hover-text: #fff;
+}
+
+body {
+  background-color: var(--site-bg);
+}
+
+/* Profile header */
+header .image.avatar img {
+  width: 150px;
+  height: 150px;
+  padding: 0;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+header h1 {
+  margin: 18px 0 12px;
+}
+
+header .social-icons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: nowrap;
+}
+
+header .social-icons a {
+  width: 2.1rem;
+  height: 2.1rem;
+  line-height: 2.2rem;
+  font-size: 1.05rem;
+  color: var(--site-accent) !important;
+}
+
+header .social-icons a:hover {
+  background-color: var(--site-accent) !important;
+  color: #fff !important;
+  transform: scale(1.15);
+}
+
+/* Headings and links take the site accent instead of the theme's navy and blue. */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--site-accent);
+}
+
+a {
+  color: var(--site-accent);
+  font-weight: 600;
+}
+
+a:hover {
+  color: var(--site-hover);
+}
+
+/* <autocolor> marks links that should read as plain text, like the affiliation. */
+a autocolor {
+  color: var(--site-text);
+  font-weight: 400;
+}
+
+a:hover autocolor {
+  color: var(--site-hover);
+}
+
+/* Section titles: centered with a short gradient underline. */
+section h2 {
+  position: relative;
+  width: fit-content;
+  margin: 2px auto 16px;
+  padding-bottom: 5px;
+  text-align: center;
+}
+
+section h2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  border-radius: 3px;
+  background: linear-gradient(to right, var(--site-accent), var(--site-hover));
+}
+
+hr.section-divider {
+  border: none;
+  height: 1px;
+  margin: 36px 0;
+  background: linear-gradient(to right, transparent, var(--site-accent) 50%, transparent);
+  opacity: 0.35;
+}
+
+/* Bio */
+.bio-text {
+  text-align: justify;
+  margin: 0;
+}
+
+.more-about-me {
+  margin-top: 8px;
+}
+
+.more-about-me summary {
+  cursor: pointer;
+  color: var(--site-accent);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.more-about-me summary:hover {
+  color: var(--site-hover);
+}
+
+.more-about-me p {
+  font-size: 13.5px;
+  color: var(--site-muted);
+  margin: 8px 0 0;
+}
+
+/* Scrolling boxes (news, publications) fade out at the bottom edge. */
+.news-box,
+.publications-box {
+  overflow-y: auto;
+  padding-right: 6px;
+  scrollbar-width: thin;
+}
+
+.news-box {
+  max-height: 210px;
+  -webkit-mask-image: linear-gradient(to bottom, black calc(100% - 22px), transparent 100%);
+  mask-image: linear-gradient(to bottom, black calc(100% - 22px), transparent 100%);
+}
+
+.publications-box {
+  max-height: 480px;
+  -webkit-mask-image: linear-gradient(to bottom, black calc(100% - 28px), transparent 100%);
+  mask-image: linear-gradient(to bottom, black calc(100% - 28px), transparent 100%);
+}
+
+/* News */
+.news-item {
+  padding: 4px 0 4px 12px;
+  font-size: 14px;
+  /* Kept on every row so highlighting a milestone causes no layout shift. */
+  border-left: 3px solid transparent;
+}
+
+.news-item + .news-item {
+  border-top: 1px solid var(--site-rule);
+}
+
+.news-item-milestone {
+  border-left-color: var(--site-accent);
+  background: linear-gradient(to right, var(--site-accent-tint), transparent 70%);
+  font-weight: 500;
+}
+
+.news-date {
+  display: inline-block;
+  min-width: 62px;
+  font-weight: bold;
+}
+
+.news-item-milestone .news-date {
+  color: var(--site-accent);
+}
+
+/* Research experience: icon, organization, dates. */
+.experience-list {
+  display: grid;
+  grid-template-columns: 21px 1fr auto;
+  align-items: start;
+  column-gap: 10px;
+  row-gap: 10px;
+  font-size: 14px;
+}
+
+.experience-icon {
+  color: var(--site-accent);
+  text-align: center;
+  line-height: 1.4;
+}
+
+.experience-org {
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.experience-role {
+  font-weight: 400;
+}
+
+.experience-focus {
+  font-weight: 400;
+  color: var(--site-muted);
+}
+
+.experience-time {
+  color: var(--site-muted);
+  white-space: nowrap;
+  line-height: 1.4;
+}
+
+.experience-divider {
+  grid-column: 1 / -1;
+  height: 1px;
+  background: var(--site-rule);
+}
+
+/* Publications: compact list without teaser images. */
+.publications {
+  margin-top: 0;
+}
+
+.publications ol.bibliography {
+  margin: 0;
+}
+
+.publications ol.bibliography li {
+  min-height: 0;
+  margin: 0;
+  padding: 11px 0;
+}
+
+.publications ol.bibliography li:first-child {
+  padding-top: 2px;
+}
+
+.publications ol.bibliography li + li {
+  border-top: 1px solid var(--site-rule);
+}
+
+.publications .pub-row {
+  display: block;
+}
+
+.publications ol.bibliography li .title {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.35;
+  margin-bottom: 3px;
+}
+
+.publications ol.bibliography li .title a:hover {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.publications ol.bibliography li .author {
+  font-size: 13.5px;
+  line-height: 1.45;
+  color: var(--site-muted);
+  margin-bottom: 4px;
+}
+
+.publications ol.bibliography li .author strong {
+  color: var(--site-text);
+  font-weight: 700;
+}
+
+.publications .pub-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 5px 10px;
+}
+
+.publications .periodical {
+  font-size: 13px;
+  line-height: 1.35;
+  color: var(--site-muted);
+}
+
+.publications .periodical strong {
+  color: var(--site-text);
+  font-weight: 600;
+}
+
+.pub-note {
+  color: var(--site-hover);
+  font-size: 12px;
+}
+
+/* Link buttons shared by publications and projects. */
+.links {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.publications ol.bibliography li .links a.btn,
+.project-item .links a.btn {
+  display: inline-flex;
+  align-items: center;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1;
+  padding: 3px 8px;
+  border-radius: 4px;
+  color: var(--site-accent);
+  background-color: var(--site-accent-tint);
+  border: 1px solid var(--site-accent-border);
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.publications ol.bibliography li .links a.btn:hover,
+.project-item .links a.btn:hover {
+  background-color: var(--site-accent);
+  border-color: var(--site-accent);
+  color: var(--site-btn-hover-text);
+}
+
+/* Selected projects */
+.project-item {
+  padding: 11px 0 11px 12px;
+  border-left: 3px solid transparent;
+}
+
+.project-item + .project-item {
+  border-top: 1px solid var(--site-rule);
+}
+
+.project-item-featured {
+  border-left-color: var(--site-accent);
+  background: linear-gradient(to right, var(--site-accent-tint), transparent 70%);
+}
+
+.project-title {
+  font-size: 15px;
+  line-height: 1.35;
+  margin-bottom: 3px;
+}
+
+.project-badge {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 2px 6px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  vertical-align: 2px;
+  border-radius: 3px;
+  color: #fff;
+  background: linear-gradient(to right, var(--site-accent), var(--site-hover));
+}
+
+.project-desc {
+  font-size: 13.5px;
+  line-height: 1.45;
+  color: var(--site-muted);
+  margin-bottom: 6px;
+}
+
+/* Phones: stack the experience dates under each entry. */
+@media print, screen and (max-width: 480px) {
+  .experience-list {
+    grid-template-columns: 21px 1fr;
+  }
+
+  .experience-time {
+    grid-column: 2;
+    margin-top: -8px;
+    font-size: 13px;
+  }
+}

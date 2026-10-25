@@ -1,0 +1,20 @@
+# Fields: org, role, focus, time, icon (a Font Awesome 6 class), link.
+# Set divider: true on an entry to draw a line above it.
+- org: Electronic Arts (EA)
+  role: Research Intern
+  focus: efficient language models for real-time reasoning in games
+  time: Present
+  icon: fa-solid fa-gamepad
+  link: https://www.ea.com/
+
+- org: Computing Science, University of Alberta
+  role: M.Sc. Student Researcher
+  focus: visual and spatial reasoning in multimodal language models, with Prof. Osmar Zaiane and Prof. Matt Taylor
+  icon: fa-solid fa-graduation-cap
+  link: https://www.ualberta.ca/en/computing-science/
+
+- org: Electrical &amp; Computer Engineering, University of Alberta
+  role: Ph.D. Student (transferred to CS M.Sc.)
+  focus: robotics and control, hybrid FES-exoskeleton systems
+  icon: fa-solid fa-robot
+  link: https://www.ualberta.ca/en/electrical-computer-engineering/
