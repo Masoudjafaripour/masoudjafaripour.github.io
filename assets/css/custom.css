@@ -211,7 +211,9 @@ hr.section-divider {
 }
 
 .experience-focus {
+  display: block;
   font-weight: 400;
+  font-size: 13.5px;
   color: var(--site-muted);
 }
 
