@@ -23,6 +23,9 @@
         {%- if link.page %}
         <a href="{{ link.page }}" class="btn btn-sm z-depth-0" role="button" target="_blank" rel="noopener">Project Page</a>
         {%- endif %}
+        {%- if link.video %}
+        <a href="{{ link.video }}" class="btn btn-sm z-depth-0" role="button" target="_blank" rel="noopener">Video</a>
+        {%- endif %}
         {%- if link.bibtex %}
         <a href="{{ link.bibtex }}" class="btn btn-sm z-depth-0" role="button" target="_blank" rel="noopener">BibTeX</a>
         {%- endif %}

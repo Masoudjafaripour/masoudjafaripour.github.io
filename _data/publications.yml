@@ -1,26 +1,34 @@
-# Fields: title, authors, conference (venue line), pdf, code, page, bibtex, notes, others.
+# Fields: title, authors, conference (venue line), pdf, code, page, video, bibtex, notes, others.
 # All fields except title are optional.
 main:
 
+  - title: "SAVeR: Spatially-Adaptive Visual Reasoning with Self-Reward in Multimodal LLMs"
+    authors: <strong>Masoud Jafaripour</strong>, Mohamadali Tofigh, Osmar R. Zaiane
+    conference: Under review
+
+  - title: "Towards a Data-Centric Understanding of Spatial Reasoning in Multimodal Large Language Models"
+    authors: Mahdieh Mallahnezhad, <strong>Masoud Jafaripour</strong>, Mohamadali Tofigh, Sheila Schoepp, Osmar R. Zaiane
+    conference: Under review at <strong>Artificial Intelligence Review</strong>
+    pdf: https://arxiv.org/pdf/2610.19108
+
+  - title: "Differential Confidence Mapping: Reliable Calibration of LLMs via Contrastive Prompting & Graph"
+    authors: <strong>Masoud Jafaripour</strong>, S. Amini
+    conference: Under review
+
   - title: "The Evolving Landscape of LLM- and VLM-Integrated Reinforcement Learning"
-    authors: Sheila Schoepp, <strong>Masoud Jafaripour</strong>, Yingyue Cao, Tianpei Yang, Fatemeh Abdollahi, Shadan Golestan, Zahin Sufiyan, Osmar R. Zaiane, Matthew E. Taylor
-    conference: International Joint Conference on Artificial Intelligence <strong>(IJCAI)</strong>, 2025
+    authors: Sheila Schoepp, <strong>Masoud Jafaripour*</strong>, Yingyue Cao*, Tianpei Yang, Fatemeh Abdollahi, Shadan Golestan, Zahin Sufiyan, Osmar R. Zaiane, Matthew E. Taylor (*Equal contribution)
+    conference: International Joint Conference on Artificial Intelligence <strong>(IJCAI)</strong>, 2025, Montreal, Canada
     pdf: https://arxiv.org/pdf/2502.15214
     code: https://github.com/Masoudjafaripour/FM_RL_Survey
+    notes: 19.6% acceptance rate
 
   - title: "Adaptive Iterative Feedback Prompting for Obstacle-Aware Path Planning via LLMs"
     authors: <strong>Masoud Jafaripour</strong>, Shadan Golestan, Shotaro Miwa, Yoshihiro Mitsuka, Osmar R. Zaiane
-    conference: LM4Plan Workshop @ AAAI Conference on Artificial Intelligence <strong>(AAAI)</strong>, 2025
+    conference: LM4Plan Workshop @ AAAI Conference on Artificial Intelligence <strong>(AAAI)</strong>, 2025, Philadelphia, USA
     pdf: https://openreview.net/pdf?id=M4rLudFbT2
     code: https://github.com/Masoudjafaripour/AIFP
 
   - title: "Optimal Integration of Hybrid FES-Exoskeleton for Precise Knee Trajectory Control"
     authors: <strong>Masoud Jafaripour</strong>, Vivian K. Mushahwar, Mahdi Tavakoli
-    conference: IEEE/RSJ International Conference on Intelligent Robots and Systems <strong>(IROS)</strong>, 2024
+    conference: IEEE/RSJ International Conference on Intelligent Robots and Systems <strong>(IROS)</strong>, 2024, Abu Dhabi, UAE
     pdf: https://www.ece.ualberta.ca/~tbs/pmwiki/pdf/Jafaripour-IROS-2024.pdf
-
-  - title: "Understanding Spatial Reasoning in Multimodal Large Language Models through Data and Evaluation"
-    conference: Under review
-
-  - title: "KV-aware Test-Time Scaling for Efficient Geometric and Spatial Reasoning in Multimodal LLMs"
-    conference: In progress

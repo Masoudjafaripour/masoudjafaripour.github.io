@@ -4,6 +4,9 @@
   milestone: true
   text: I am a Research Intern at <i>Electronic Arts (EA)</i>, working on efficient language models for real-time reasoning and decision-making in games.
 
+- date: "Oct 26"
+  text: Our preprint "Towards a Data-Centric Understanding of Spatial Reasoning in Multimodal Large Language Models" is on <a href="https://arxiv.org/abs/2610.19108">arXiv</a> and under review at <i>Artificial Intelligence Review</i>.
+
 - date: "2025"
   text: Released <a href="https://masoudjafaripour.github.io/Vibe_CADing/">Vibe-CADing</a>, an open-source text-to-CAD pipeline where an LLM writes and repairs CAD programs.
 
