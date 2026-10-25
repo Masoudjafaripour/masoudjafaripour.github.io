@@ -6,7 +6,7 @@
   <div class="experience-divider"></div>
   {%- endif %}
   {%- if job.logo %}
-  <img class="experience-logo" src="{{ job.logo }}" alt="{{ job.org }} logo" />
+  <img class="experience-logo" src="{{ job.logo }}?v={{ site.time | date: '%s' }}" alt="{{ job.org }} logo" />
   {%- else %}
   <i class="experience-icon {{ job.icon | default: 'fa-solid fa-flask' }}" aria-hidden="true"></i>
   {%- endif %}
