@@ -1,19 +1,38 @@
-# Fields: title, description, page, code, report, featured.
+# Fields: title, tech, context, time, description, page, code, report, featured.
+- title: nanochat-VLM
+  tech: RustBPE/tiktoken, FineWeb, PyTorch DDP
+  context: Personal
+  time: Oct. 2025 &ndash; Ongoing
+  description: A minimal VLM built from scratch by extending nanochat with vision tokenization and multimodal fusion.
+  code: https://github.com/Masoudjafaripour/nanochat-VLM
+
 - title: Vibe-CADing
-  description: Conditional CAD generation and retrieval for a text-to-CAD design pipeline. An LLM writes a program that builds a 3D shape from a text prompt, and errors from failed runs are fed back until the output is valid.
+  tech: Diffusion, AR Generation, LangChain, B-Rep, Harness, Blender
+  context: Personal
+  time: Apr. 2025 &ndash; Ongoing
+  description: An agentic harness pipeline that retrieves, generates, and refines CAD parts from natural-language prompts and visual GUI input.
   page: https://masoudjafaripour.github.io/Vibe_CADing/
   code: https://github.com/Masoudjafaripour/Vibe_CADing
   report: https://masoudjafaripour.github.io/Vibe_CADing/media/vibe_cading_report.pdf
   featured: true
 
-- title: nanochat-VLM
-  description: A minimal, hackable vision-language model built on Karpathy's nanochat, adding image understanding and multimodal chat.
-  code: https://github.com/Masoudjafaripour/nanochat-VLM
+- title: Visual RAG
+  tech: RAG, FAISS, SAM, DINO, CLIP
+  context: Amii Labs
+  time: Feb. 2025 &ndash; Jun. 2025
+  description: A hybrid image-text retrieval system that fetches relevant demonstrations to improve few-shot in-context planning.
 
-- title: LM Agents
-  description: Post-training LLM agents with SFT, on-policy distillation, and RL fine-tuning on SWE-bench and multi-turn benchmarks.
-  code: https://github.com/Masoudjafaripour/LM_Agents
+- title: Spatial Reasoning in VLMs
+  tech: LLaVA/Qwen-VL, Transformers &amp; TRL
+  context: Reasoning Course
+  time: Jan. 2025 &ndash; May 2025
+  description: Enhanced spatial reasoning in VLMs with CoT and VoT prompting and in-context RL for 3D visual environments.
+  code: https://github.com/Masoudjafaripour/Spatial_Reasoning_VLMs
 
-- title: Embodied Distilled SMLM
-  description: Distilling a large teacher into a small vision-language model for efficient embodied spatial reasoning and action planning.
-  code: https://github.com/Masoudjafaripour/Embodied_Distilled_SMLM
+- title: Game Pathfinding
+  tech: C++, Docker, Heuristic Search, Graph Data Structures
+  context: Search Course
+  time: Feb. 2025 &ndash; Apr. 2025
+  description: Efficient search through offline abstraction and online heuristic embeddings for pathfinding on game maps.
+  code: https://github.com/Masoudjafaripour/Single_Agent_Search_Project
+  report: https://github.com/Masoudjafaripour/Single_Agent_Search_Project/blob/master/CMPUT_658___Assignment_3__Course_Project_MasoudJafaripour.pdf

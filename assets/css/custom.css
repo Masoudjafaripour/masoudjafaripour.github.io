@@ -339,10 +339,33 @@ hr.section-divider {
   background: linear-gradient(to right, var(--site-accent-tint), transparent 70%);
 }
 
+.project-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 2px 12px;
+  margin-bottom: 2px;
+}
+
 .project-title {
   font-size: 15px;
+  font-weight: 600;
   line-height: 1.35;
-  margin-bottom: 3px;
+  color: var(--site-accent);
+}
+
+.project-time {
+  font-size: 13px;
+  color: var(--site-muted);
+  white-space: nowrap;
+}
+
+.project-meta {
+  font-size: 12.5px;
+  line-height: 1.4;
+  color: var(--site-muted);
+  margin-bottom: 4px;
 }
 
 .project-badge {
