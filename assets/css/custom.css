@@ -181,7 +181,7 @@ hr.section-divider {
 /* Research experience: icon, organization, dates. */
 .experience-list {
   display: grid;
-  grid-template-columns: 21px 1fr auto;
+  grid-template-columns: 24px 1fr auto;
   align-items: start;
   column-gap: 10px;
   row-gap: 10px;
@@ -195,8 +195,8 @@ hr.section-divider {
 }
 
 .experience-logo {
-  width: 21px;
-  height: 21px;
+  width: 24px;
+  height: 24px;
   object-fit: contain;
   border-radius: 4px;
 }
@@ -399,7 +399,7 @@ hr.section-divider {
 /* Phones: stack the experience dates under each entry. */
 @media print, screen and (max-width: 480px) {
   .experience-list {
-    grid-template-columns: 21px 1fr;
+    grid-template-columns: 24px 1fr;
   }
 
   .experience-time {
