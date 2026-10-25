@@ -2,7 +2,7 @@
 # text accepts inline HTML.
 - date: "Now"
   milestone: true
-  text: I am a Research Intern at <i>Electronic Arts (EA)</i>, working on efficient language models for real-time reasoning and decision-making in games.
+  text: I am a Research Scientist Intern at <i>Electronic Arts (SEED)</i> in Vancouver, training small language models for long-horizon agentic tasks in real-time gameplay.
 
 - date: "Oct 26"
   text: Our preprint "Towards a Data-Centric Understanding of Spatial Reasoning in Multimodal Large Language Models" is on <a href="https://arxiv.org/abs/2610.19108">arXiv</a> and under review at <i>Artificial Intelligence Review</i>.

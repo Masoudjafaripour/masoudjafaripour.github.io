@@ -1,20 +1,36 @@
 # Fields: org, role, focus, time, icon (a Font Awesome 6 class), link.
 # Set divider: true on an entry to draw a line above it.
-- org: Electronic Arts (EA)
-  role: Research Intern
-  focus: efficient language models for real-time reasoning in games
-  time: Present
+- org: Electronic Arts (SEED)
+  role: Research Scientist Intern
+  focus: post-training small language models for long-horizon, multi-turn agentic gameplay as action &amp; world models
+  time: 05/25 &ndash; 12/26
   icon: fa-solid fa-gamepad
-  link: https://www.ea.com/
+  link: https://www.ea.com/seed
 
 - org: Computing Science, University of Alberta
-  role: M.Sc. Student Researcher
-  focus: visual and spatial reasoning in multimodal language models, with Prof. Osmar Zaiane and Prof. Matt Taylor
+  role: Research Assistant
+  focus: implicit world modeling and spatial-action reasoning in VLAs, inference-time scaling in multimodal LMs; with Mitsubishi Electric, supervised by Prof. Osmar R. Zaiane
+  time: 06/24 &ndash; Now
   icon: fa-solid fa-graduation-cap
   link: https://www.ualberta.ca/en/computing-science/
 
-- org: Electrical &amp; Computer Engineering, University of Alberta
-  role: Ph.D. Student (transferred to CS M.Sc.)
-  focus: robotics and control, hybrid FES-exoskeleton systems
+- org: Vector Institute
+  role: Teaching Assistant
+  focus: Multimodal LLM Bootcamp, guiding teams building multimodal pipelines
+  time: 08/25 &ndash; 12/25
+  icon: fa-solid fa-chalkboard-user
+  link: https://vectorinstitute.ai/
+
+- org: Stanford NLP Group
+  role: NLP Researcher, remote
+  focus: LLM uncertainty estimation via contrastive prompting and graph-based confidence mapping
+  time: 01/25 &ndash; 05/25
+  icon: fa-solid fa-comments
+  link: https://nlp.stanford.edu/
+
+- org: iSMART &amp; ECE, University of Alberta
+  role: Research Assistant
+  focus: real-time torque optimization and deep RL control for robotic exoskeletons
+  time: 09/22 &ndash; 06/24
   icon: fa-solid fa-robot
   link: https://www.ualberta.ca/en/electrical-computer-engineering/
