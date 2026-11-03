@@ -1,11 +1,11 @@
 # Newest first. Set milestone: true to highlight an item (new roles, defenses, awards).
 # text accepts inline HTML.
-- date: "Now"
-  milestone: true
-  text: I am a Research Scientist Intern at <i>Electronic Arts (EA)</i> in Vancouver, training small language models for long-horizon agentic tasks in real-time gameplay.
-
 - date: "Oct 26"
   text: Our preprint "Towards a Data-Centric Understanding of Spatial Reasoning in Multimodal Large Language Models" is on <a href="https://arxiv.org/abs/2610.19108">arXiv</a> and under review at <i>Artificial Intelligence Review</i>.
+
+- date: "May 26"
+  milestone: true
+  text: I joined <i>Electronic Arts (EA)</i> in Vancouver as a Research Scientist Intern, training small language models for long-horizon agentic tasks in real-time gameplay.
 
 - date: "2025"
   text: Released <a href="https://masoudjafaripour.github.io/Vibe_CADing/">Vibe-CADing</a>, an open-source text-to-CAD pipeline where an LLM writes and repairs CAD programs.
