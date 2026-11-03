@@ -18,6 +18,19 @@ body {
   background-color: var(--site-bg);
 }
 
+/* Wider content column on large screens. The theme's 960px frame (232px
+   sidebar + 650px column) stays below this breakpoint so mid-size windows
+   never scroll sideways. */
+@media screen and (min-width: 1180px) {
+  .wrapper {
+    width: 1120px;
+  }
+
+  section {
+    width: 810px;
+  }
+}
+
 /* Profile header */
 header .image.avatar img {
   width: 150px;
