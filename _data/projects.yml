@@ -30,10 +30,9 @@
   description: Enhanced spatial reasoning in VLMs with CoT and VoT prompting and in-context RL for 3D visual environments.
   code: https://github.com/Masoudjafaripour/Spatial_Reasoning_VLMs
 
-- title: Game Pathfinding
-  tech: C++, Docker, Heuristic Search, Graph Data Structures
-  context: Search Course
-  time: Feb. 2025 &ndash; Apr. 2025
-  description: Efficient search through offline abstraction and online heuristic embeddings for pathfinding on game maps.
-  code: https://github.com/Masoudjafaripour/Single_Agent_Search_Project
-  report: https://github.com/Masoudjafaripour/Single_Agent_Search_Project/blob/master/CMPUT_658___Assignment_3__Course_Project_MasoudJafaripour.pdf
+- title: "World Models: Koopman, SSMs &amp; Video Dynamics"
+  tech: Koopman/EDMD, Selective SSMs, A2C, SigLIP, PyTorch DDP
+  context: Personal
+  time: May 2023 &ndash; Ongoing
+  description: World models at four levels of abstraction, from Koopman operators for robust MPC and a selective SSM belief for RL on partially observed CartPole, to pixel-space video models for grid and maze planning and a language-conditioned robot policy with a world-model loss, trained with multi-GPU DDP on LIBERO.
+  code: https://github.com/Masoudjafaripour/World_Model_SSMs_Video_IMGGen
