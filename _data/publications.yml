@@ -1,17 +1,21 @@
-# Fields: title, authors, conference (venue line), pdf, code, page, video, bibtex, notes, others.
-# All fields except title are optional.
+# Fields: title, badge (short venue label), image (teaser path, e.g. assets/img/pubs/name.png),
+# authors, conference (venue line), pdf, code, page, video, bibtex, notes, others.
+# All fields except title are optional; entries without an image show a placeholder.
 main:
 
   - title: "SAVeR: Spatially-Adaptive Visual Reasoning with Self-Reward in Multimodal LLMs"
+    badge: Under Review
     authors: <strong>Masoud Jafaripour</strong>, Mohamadali Tofigh, Osmar R. Zaiane
     conference: Under review
 
   - title: "Towards a Data-Centric Understanding of Spatial Reasoning in Multimodal Large Language Models"
+    badge: Under Review
     authors: Mahdieh Mallahnezhad, <strong>Masoud Jafaripour</strong>, Mohamadali Tofigh, Sheila Schoepp, Osmar R. Zaiane
     conference: Under review at <strong>Artificial Intelligence Review</strong>
     pdf: https://arxiv.org/pdf/2610.19108
 
   - title: "The Evolving Landscape of LLM- and VLM-Integrated Reinforcement Learning"
+    badge: IJCAI 2025
     authors: Sheila Schoepp, <strong>Masoud Jafaripour*</strong>, Yingyue Cao*, Tianpei Yang, Fatemeh Abdollahi, Shadan Golestan, Zahin Sufiyan, Osmar R. Zaiane, Matthew E. Taylor (*Equal contribution)
     conference: International Joint Conference on Artificial Intelligence <strong>(IJCAI)</strong>, 2025, Montreal, Canada
     pdf: https://arxiv.org/pdf/2502.15214
@@ -19,12 +23,14 @@ main:
     notes: 19.6% acceptance rate
 
   - title: "Adaptive Iterative Feedback Prompting for Obstacle-Aware Path Planning via LLMs"
+    badge: AAAI 2025 Workshop
     authors: <strong>Masoud Jafaripour</strong>, Shadan Golestan, Shotaro Miwa, Yoshihiro Mitsuka, Osmar R. Zaiane
     conference: LM4Plan Workshop @ AAAI Conference on Artificial Intelligence <strong>(AAAI)</strong>, 2025, Philadelphia, USA
     pdf: https://openreview.net/pdf?id=M4rLudFbT2
     code: https://github.com/Masoudjafaripour/AIFP
 
   - title: "Optimal Integration of Hybrid FES-Exoskeleton for Precise Knee Trajectory Control"
+    badge: IROS 2024
     authors: <strong>Masoud Jafaripour</strong>, Vivian K. Mushahwar, Mahdi Tavakoli
     conference: IEEE/RSJ International Conference on Intelligent Robots and Systems <strong>(IROS)</strong>, 2024, Abu Dhabi, UAE
     pdf: https://www.ece.ualberta.ca/~tbs/pmwiki/pdf/Jafaripour-IROS-2024.pdf

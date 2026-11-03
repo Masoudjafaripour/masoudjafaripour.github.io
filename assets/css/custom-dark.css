@@ -32,6 +32,10 @@
     padding: 1px;
   }
 
+  .pub-badge {
+    color: #1c1c1c;
+  }
+
   autocolor {
     color: var(--site-text);
   }
