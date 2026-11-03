@@ -1,0 +1,39 @@
+---
+layout: homepage
+---
+{%- comment -%}
+  Project detail page. Set `project:` in front matter to the matching title in
+  _data/projects.yml; the header (stack, dates, link buttons) is read from there.
+{%- endcomment -%}
+{%- assign project = site.data.projects | where: "title", page.project | first %}
+<div class="project-page">
+  <a class="back-link" href="{{ '/' | relative_url }}#selected-projects"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Back to home</a>
+
+  <h2 id="project-title">{{ project.title | default: page.title }}</h2>
+
+  {%- if project.tech or project.context or project.time %}
+  <div class="project-page-meta">
+    {%- if project.tech %}<span>{{ project.tech }}</span>{% endif %}
+    {%- if project.context %}<span><em>{{ project.context }}</em></span>{% endif %}
+    {%- if project.time %}<span>{{ project.time }}</span>{% endif %}
+  </div>
+  {%- endif %}
+
+  {%- if project.page or project.code or project.report %}
+  <div class="links project-page-links">
+    {%- if project.page %}
+    <a href="{{ project.page }}" class="btn" target="_blank" rel="noopener">Project Page</a>
+    {%- endif %}
+    {%- if project.code %}
+    <a href="{{ project.code }}" class="btn" target="_blank" rel="noopener"><i class="fa-brands fa-github" aria-hidden="true"></i> Code</a>
+    {%- endif %}
+    {%- if project.report %}
+    <a href="{{ project.report }}" class="btn" target="_blank" rel="noopener">Report</a>
+    {%- endif %}
+  </div>
+  {%- endif %}
+
+  <div class="project-page-body">
+{{ content }}
+  </div>
+</div>

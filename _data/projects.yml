@@ -1,10 +1,11 @@
-# Fields: title, tech, context, time, description, page, code, report, featured.
+# Fields: title, tech, context, time, description, subpage (a page on this site), page, code, report, featured.
 - title: nanochat-VLM
   tech: RustBPE/tiktoken, FineWeb, PyTorch DDP
   context: Personal
   time: Oct. 2025 &ndash; Ongoing
   description: A minimal VLM built from scratch by extending nanochat with vision tokenization and multimodal fusion.
   code: https://github.com/Masoudjafaripour/nanochat-VLM
+  subpage: /projects/nanochat-vlm/
 
 - title: Vibe-CADing
   tech: Diffusion, AR Generation, LangChain, B-Rep, Harness, Blender

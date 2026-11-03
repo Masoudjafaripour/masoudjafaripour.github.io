@@ -6,7 +6,9 @@
   <div class="project-item{% if project.featured %} project-item-featured{% endif %}">
     <div class="project-head">
       <span class="project-title">
-        {%- if project_link %}<a href="{{ project_link }}" target="_blank" rel="noopener">{{ project.title }}</a>{% else %}{{ project.title }}{% endif %}
+        {%- if project.subpage %}<a href="{{ project.subpage | relative_url }}">{{ project.title }}</a>
+        {%- elsif project_link %}<a href="{{ project_link }}" target="_blank" rel="noopener">{{ project.title }}</a>
+        {%- else %}{{ project.title }}{% endif %}
         {%- if project.featured %} <span class="project-badge">Featured</span>{% endif %}
       </span>
       {%- if project.time %}
@@ -17,8 +19,11 @@
     <div class="project-meta">{{ project.tech }}{% if project.tech and project.context %} &middot; {% endif %}{% if project.context %}<em>{{ project.context }}</em>{% endif %}</div>
     {%- endif %}
     <div class="project-desc">{{ project.description }}</div>
-    {%- if project.page or project.code or project.report %}
+    {%- if project.subpage or project.page or project.code or project.report %}
     <div class="links">
+      {%- if project.subpage %}
+      <a href="{{ project.subpage | relative_url }}" class="btn">Details</a>
+      {%- endif %}
       {%- if project.page %}
       <a href="{{ project.page }}" class="btn" target="_blank" rel="noopener">Project Page</a>
       {%- endif %}
