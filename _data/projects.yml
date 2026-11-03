@@ -12,7 +12,7 @@
   context: Personal
   time: Apr. 2025 &ndash; Ongoing
   description: An agentic harness pipeline that retrieves, generates, and refines CAD parts from natural-language prompts and visual GUI input.
-  page: https://masoudjafaripour.github.io/Vibe_CADing/
+  subpage: /Vibe_CADing/
   code: https://github.com/Masoudjafaripour/Vibe_CADing
   report: https://masoudjafaripour.github.io/Vibe_CADing/media/vibe_cading_report.pdf
   featured: true
