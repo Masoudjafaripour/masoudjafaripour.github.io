@@ -1,42 +1,65 @@
-/* Dark palette for custom.css, loaded only when auto_dark_mode is on. */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --site-bg: #20212b;
-    --site-text: #eeeff0;
-    --site-muted: #a8acb5;
-    --site-faint: #8a8e98;
-    --site-accent: #e3a56f;
-    --site-hover: #f3c99b;
-    --site-accent-tint: rgba(227, 165, 111, 0.10);
-    --site-accent-border: rgba(227, 165, 111, 0.38);
-    --site-rule: rgba(255, 255, 255, 0.10);
-    --site-btn-hover-text: #1c1c1c;
-  }
+/* Dark palette, applied when <html data-theme="dark">. The theme's own dark rules
+   only follow the system setting, so they are repeated here under the same selector
+   to let the toggle button switch them. */
+:root[data-theme="dark"] {
+  --site-bg: #20212b;
+  --site-text: #eeeff0;
+  --site-muted: #a8acb5;
+  --site-faint: #8a8e98;
+  --site-accent: #e3a56f;
+  --site-hover: #f3c99b;
+  --site-accent-tint: rgba(227, 165, 111, 0.10);
+  --site-accent-border: rgba(227, 165, 111, 0.38);
+  --site-rule: rgba(255, 255, 255, 0.10);
+  --site-btn-hover-text: #1c1c1c;
+  --global-theme-color: rgb(36, 150, 203);
+  color-scheme: dark;
+}
 
-  /* The theme sets these inside its own dark-mode block, so match it here. */
-  h1, h2, h3, h4, h5, h6, a {
-    color: var(--site-accent);
-  }
+/* From the theme's dark mode. */
+[data-theme="dark"] body {
+  color: #dadbdf;
+}
 
-  header .social-icons a {
-    color: var(--site-accent) !important;
-  }
+[data-theme="dark"] strong,
+[data-theme="dark"] papertitle {
+  color: #eeeff0;
+}
 
-  header .social-icons a:hover {
-    color: #1c1c1c !important;
-  }
+[data-theme="dark"] lightonly {
+  visibility: hidden;
+}
 
-  /* Dark logos (Vector, EA) vanish on the dark page without a light backing. */
-  .experience-logo {
-    background-color: #fff;
-    padding: 1px;
-  }
+[data-theme="dark"] darkonly {
+  visibility: visible;
+}
 
-  .pub-badge {
-    color: #1c1c1c;
-  }
+[data-theme="dark"] h1, [data-theme="dark"] h2, [data-theme="dark"] h3,
+[data-theme="dark"] h4, [data-theme="dark"] h5, [data-theme="dark"] h6,
+[data-theme="dark"] a, [data-theme="dark"] th, [data-theme="dark"] dt {
+  color: var(--site-accent);
+}
 
-  autocolor {
-    color: var(--site-text);
-  }
+[data-theme="dark"] header .social-icons a,
+[data-theme="dark"] header .social-icons .theme-toggle {
+  color: var(--site-accent) !important;
+}
+
+[data-theme="dark"] header .social-icons a:hover,
+[data-theme="dark"] header .social-icons .theme-toggle:hover {
+  color: #1c1c1c !important;
+}
+
+/* Dark logos (Vector, EA) vanish on the dark page without a light backing. */
+[data-theme="dark"] .experience-logo {
+  background-color: #fff;
+  padding: 1px;
+}
+
+[data-theme="dark"] .pub-badge {
+  color: #1c1c1c;
+}
+
+[data-theme="dark"] autocolor {
+  color: var(--site-text);
 }
