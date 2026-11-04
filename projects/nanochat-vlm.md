@@ -11,16 +11,33 @@ description: nanochat-VLM, a minimal vision-language model trained end-to-end in
 ### How it works
 
 <div class="method-demo">
-<iframe id="vlm-demo" src="{{ '/assets/demos/nanochat-vlm/index.html?embed' | relative_url }}" title="nanochat-VLM method animation" loading="lazy" style="width:100%;height:820px;border:0;border-radius:16px;display:block"></iframe>
+<iframe id="vlm-demo" data-src="{{ '/assets/demos/nanochat-vlm/index.html?embed' | relative_url }}" title="nanochat-VLM method animation" loading="lazy" style="width:100%;height:820px;border:0;border-radius:16px;display:block;color-scheme:normal"></iframe>
 </div>
 <script>
-  // The demo posts its content height so the frame fits it without a scrollbar.
-  addEventListener("message", function (e) {
+  (function () {
     var frame = document.getElementById("vlm-demo");
-    if (frame && e.source === frame.contentWindow && e.data && e.data.type === "method-demo:height") {
-      frame.style.height = e.data.height + "px";
+    var root = document.documentElement;
+    function theme() {
+      return root.getAttribute("data-theme") === "dark" ? "dark" : "light";
     }
-  });
+
+    // Open the demo in the site's current theme.
+    frame.src = frame.getAttribute("data-src") + "&theme=" + theme();
+
+    // The demo posts its content height so the frame fits it without a scrollbar.
+    addEventListener("message", function (e) {
+      if (e.source === frame.contentWindow && e.data && e.data.type === "method-demo:height") {
+        frame.style.height = e.data.height + "px";
+      }
+    });
+
+    // Follow the site's light/dark toggle.
+    new MutationObserver(function () {
+      if (frame.contentWindow) {
+        frame.contentWindow.postMessage({ type: "method-demo:theme", theme: theme() }, "*");
+      }
+    }).observe(root, { attributes: true, attributeFilter: ["data-theme"] });
+  })();
 </script>
 
 ### Goals
