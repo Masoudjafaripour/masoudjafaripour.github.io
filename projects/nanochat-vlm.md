@@ -8,6 +8,21 @@ description: nanochat-VLM, a minimal vision-language model trained end-to-end in
 
 **nanochat-VLM** extends Andrej Karpathy's [nanochat](https://github.com/karpathy/nanochat) toward multimodality: a small but complete **vision-language model (VLM)**, trained end-to-end with the same philosophy of minimal code, full ownership, and clear learning value. The main goal is to train the whole pipeline with nanochat-style scripts (tokenizer, then language model, then multimodal training), not just to demo inference. It is built for learning, research, and hackability rather than scale.
 
+### How it works
+
+<div class="method-demo">
+<iframe id="vlm-demo" src="{{ '/assets/demos/nanochat-vlm/index.html?embed' | relative_url }}" title="nanochat-VLM method animation" loading="lazy" style="width:100%;height:820px;border:0;border-radius:16px;display:block"></iframe>
+</div>
+<script>
+  // The demo posts its content height so the frame fits it without a scrollbar.
+  addEventListener("message", function (e) {
+    var frame = document.getElementById("vlm-demo");
+    if (frame && e.source === frame.contentWindow && e.data && e.data.type === "method-demo:height") {
+      frame.style.height = e.data.height + "px";
+    }
+  });
+</script>
+
 ### Goals
 
 - Rebuild the core nanochat LLM pipeline: tokenization, transformer, and training.
