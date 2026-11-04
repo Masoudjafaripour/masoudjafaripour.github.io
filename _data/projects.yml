@@ -32,6 +32,7 @@
   time: Jan. 2025 &ndash; May 2025
   description: Enhanced spatial reasoning in VLMs with CoT and VoT prompting and in-context RL for 3D visual environments.
   code: https://github.com/Masoudjafaripour/Spatial_Reasoning_VLMs
+  image: assets/img/projects/spatial-reasoning-vlms.jpg
 
 - title: "World Models: Koopman, SSMs &amp; Video Dynamics"
   tech: Koopman/EDMD, Selective SSMs, A2C, SigLIP, PyTorch DDP
