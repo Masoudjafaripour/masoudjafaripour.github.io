@@ -25,6 +25,7 @@
   context: Amii Labs
   time: Feb. 2025 &ndash; Jun. 2025
   description: A hybrid image-text retrieval system that fetches relevant demonstrations to improve few-shot in-context planning.
+  image: assets/img/projects/visual-rag.jpg
 
 - title: Spatial Reasoning in VLMs
   tech: LLaVA/Qwen-VL, Transformers &amp; TRL
