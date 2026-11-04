@@ -15,6 +15,7 @@ main:
     authors: Mahdieh Mallahnezhad, <strong>Masoud Jafaripour</strong>, Mohamadali Tofigh, Sheila Schoepp, Osmar R. Zaiane
     conference: Under review at <strong>Artificial Intelligence Review</strong>
     pdf: https://arxiv.org/pdf/2610.19108
+    code: https://github.com/Masoudjafaripour/Multimodal_Datasets_Generative_Reasoning
 
   - title: "The Evolving Landscape of LLM- and VLM-Integrated Reinforcement Learning"
     badge: IJCAI 2025
