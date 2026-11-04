@@ -3,7 +3,16 @@
 <div class="project-list">
 {%- for project in site.data.projects %}
   {%- assign project_link = project.page | default: project.code %}
+  {%- if project.subpage %}{% assign project_href = project.subpage | relative_url %}{% else %}{% assign project_href = project_link %}{% endif %}
+  {%- assign project_image = project.image | default: "assets/img/pubs/placeholder.svg" %}
   <div class="project-item{% if project.featured %} project-item-featured{% endif %}">
+  <div class="project-row">
+    <div class="project-thumb">
+      {%- if project_href %}<a href="{{ project_href }}"{% unless project.subpage %} target="_blank" rel="noopener"{% endunless %}>{% endif -%}
+      <img class="project-image" src="{{ project_image | relative_url }}?v={{ site.time | date: '%s' }}" alt="{% if project.image %}Preview of {{ project.title }}{% else %}Figure coming soon{% endif %}" loading="lazy" />
+      {%- if project_href %}</a>{% endif %}
+    </div>
+    <div class="project-content">
     <div class="project-head">
       <span class="project-title">
         {%- if project.subpage %}<a href="{{ project.subpage | relative_url }}">{{ project.title }}</a>
@@ -35,6 +44,8 @@
       {%- endif %}
     </div>
     {%- endif %}
+    </div>
+  </div>
   </div>
 {%- endfor %}
 </div>

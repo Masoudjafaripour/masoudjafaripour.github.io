@@ -1,4 +1,5 @@
-# Fields: title, tech, context, time, description, subpage (a page on this site), page, code, report, featured.
+# Fields: title, tech, context, time, description, image (thumbnail path, e.g. assets/img/projects/name.gif),
+# subpage (a page on this site), page, code, report, featured. Entries without an image show a placeholder.
 - title: nanochat-VLM
   tech: RustBPE/tiktoken, FineWeb, PyTorch DDP
   context: Personal
@@ -6,6 +7,7 @@
   description: A minimal VLM built from scratch by extending nanochat with vision tokenization and multimodal fusion.
   code: https://github.com/Masoudjafaripour/nanochat-VLM
   subpage: /projects/nanochat-vlm/
+  image: assets/img/projects/nanochat-vlm.gif
 
 - title: Vibe-CADing
   tech: Diffusion, AR Generation, LangChain, B-Rep, Harness, Blender
@@ -15,6 +17,7 @@
   subpage: /Vibe_CADing/
   code: https://github.com/Masoudjafaripour/Vibe_CADing
   report: https://masoudjafaripour.github.io/Vibe_CADing/media/vibe_cading_report.pdf
+  image: assets/img/projects/vibe-cading.gif
   featured: true
 
 - title: Visual RAG
@@ -36,3 +39,4 @@
   time: May 2023 &ndash; Ongoing
   description: World models at four levels of abstraction, from Koopman operators for robust MPC and a selective SSM belief for RL on partially observed CartPole, to pixel-space video models for grid and maze planning and a language-conditioned robot policy with a world-model loss, trained with multi-GPU DDP on LIBERO.
   code: https://github.com/Masoudjafaripour/World_Model_SSMs_Video_IMGGen
+  image: assets/img/projects/world-models.gif

@@ -438,6 +438,36 @@ hr.section-divider {
   background: linear-gradient(to right, var(--site-accent-tint), transparent 70%);
 }
 
+/* Small preview image (or GIF) beside each project. */
+.project-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.project-thumb {
+  flex: 0 0 140px;
+}
+
+.project-thumb a {
+  display: block;
+}
+
+.project-image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  border-radius: 6px;
+  background-color: #fff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.18);
+}
+
+.project-content {
+  flex: 1;
+  min-width: 0;
+}
+
 .project-head {
   display: flex;
   flex-wrap: wrap;
@@ -571,6 +601,17 @@ hr.section-divider {
   .pub-thumb {
     flex-basis: auto;
     width: 220px;
+    max-width: 100%;
+  }
+
+  .project-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .project-thumb {
+    flex-basis: auto;
+    width: 180px;
     max-width: 100%;
   }
 
