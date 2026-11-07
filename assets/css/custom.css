@@ -388,6 +388,24 @@ hr.section-divider {
   font-weight: 600;
 }
 
+/* Abstract opened by the ABS button. */
+.pub-abstract {
+  margin-top: 10px;
+  padding: 10px 14px;
+  border: 1px dashed var(--site-accent-border);
+  border-radius: 4px;
+  font-size: 14.5px;
+  line-height: 1.55;
+  text-align: justify;
+  color: var(--site-text);
+}
+
+.publications ol.bibliography li .links a.btn.active {
+  background-color: var(--site-accent);
+  border-color: var(--site-accent);
+  color: var(--site-btn-hover-text);
+}
+
 .pub-note {
   color: var(--site-hover);
   font-size: 13px;

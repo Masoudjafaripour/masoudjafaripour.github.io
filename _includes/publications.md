@@ -20,8 +20,11 @@
     <div class="periodical"><em>{{ link.conference }}</em>
       {%- if link.notes %} <strong><i class="pub-note">{{ link.notes }}</i></strong>{% endif %}
     </div>
-    {%- if link.pdf or link.code or link.page or link.video or link.bibtex or link.others %}
+    {%- if link.abstract or link.pdf or link.code or link.page or link.video or link.bibtex or link.others %}
     <div class="links">
+      {%- if link.abstract %}
+      <a href="#" class="btn btn-sm z-depth-0 abstract-toggle" role="button" aria-expanded="false">ABS</a>
+      {%- endif %}
       {%- if link.pdf %}
       <a href="{{ link.pdf }}" class="btn btn-sm z-depth-0" role="button" target="_blank" rel="noopener">PDF</a>
       {%- endif %}
@@ -42,9 +45,25 @@
       {%- endif %}
     </div>
     {%- endif %}
+    {%- if link.abstract %}
+    <div class="pub-abstract" hidden>{{ link.abstract }}</div>
+    {%- endif %}
   </div>
 </div>
 </li>
 {%- endfor %}
 </ol>
 </div>
+<script>
+  // ABS buttons open and close the abstract of their own publication.
+  document.querySelectorAll(".publications .abstract-toggle").forEach(function (button) {
+    button.addEventListener("click", function (event) {
+      event.preventDefault();
+      var abstract = button.closest(".pub-content").querySelector(".pub-abstract");
+      var open = abstract.hidden;
+      abstract.hidden = !open;
+      button.classList.toggle("active", open);
+      button.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+  });
+</script>

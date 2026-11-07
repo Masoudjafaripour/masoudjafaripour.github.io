@@ -1,5 +1,5 @@
 # Fields: title, badge (short venue label), image (teaser path, e.g. assets/img/pubs/name.png),
-# authors, conference (venue line), pdf, code, page, video, bibtex, notes, others.
+# authors, conference (venue line), abstract (shown by an ABS button), pdf, code, page, video, bibtex, notes, others.
 # All fields except title are optional; entries without an image show a placeholder.
 main:
 
@@ -8,12 +8,42 @@ main:
     image: assets/img/pubs/saver.png
     authors: <strong>Masoud Jafaripour</strong>, Mohamadali Tofigh, Osmar R. Zaiane
     conference: Under review
+    abstract: >-
+      Recent research on multimodal large language models (MLLMs) has increasingly focused on endowing pretrained,
+      non-reasoning models, which are already trained and widely deployed, with agentic reasoning capabilities by eliciting
+      latent knowledge at inference time without additional training or supervision. However, existing search-based
+      test-time scaling (TTS) methods for agentic reasoning often incur substantial inference overhead by expanding many
+      low-value reasoning paths and remain underexplored for spatial reasoning tasks. We introduce SAVeR, a novel,
+      training-free TTS framework using adaptive pruning and AlphaZero-inspired Monte Carlo Tree Search (MCTS) for more
+      efficient intermediate reasoning-step selection and generation by MLLMs in spatial reasoning tasks. SAVeR uses a tree
+      search algorithm to generate the most relevant sub-questions for the main visual question answering (VQA) task based
+      on the similarity between the main query, visual input, and spatial cues in the VQA and the generated sub-questions.
+      It then applies a spatially aware pruning mechanism to make the search efficient, enabling SAVeR to achieve
+      competitive TTS visual reasoning level performance with significantly reduced inference cost. Across one video-based
+      benchmark and two image-based benchmarks, namely VSI-Bench, BLINK, and 3DSRBench, which include seven diverse spatial
+      reasoning tasks, SAVeR matches or improves upon unpruned tree-search TTS baselines while reducing the number of
+      expanded nodes by 55.7% and runtime by 59.6% on average. Our analysis further reveals that search quality matters
+      more than search size, and that selective expansion improves performance on complex spatial tasks, whereas
+      indiscriminate tree growth can add computational cost. These results highlight adaptive inference-time search as a
+      promising mechanism for efficient deliberation in multimodal agents.
 
   - title: "Towards a Data-Centric Understanding of Spatial Reasoning in Multimodal Large Language Models"
     badge: Under Review
     image: assets/img/pubs/data-centric-spatial-reasoning.png
     authors: Mahdieh Mallahnezhad, <strong>Masoud Jafaripour</strong>, Mohamadali Tofigh, Sheila Schoepp, Osmar R. Zaiane
     conference: Under review at <strong>Artificial Intelligence Review</strong>
+    abstract: >-
+      Multimodal Large Language Models (MLLMs) have been widely applied in embodied agents and robotics for vision tasks.
+      However, MLLMs suffer from limitations in spatial reasoning and perception. Post-training techniques have shown promise
+      for improving these capabilities; yet, there are limited data-driven surveys of such approaches. In this survey, we
+      consider approaches to fine-tuning pretrained MLLMs for spatial reasoning tasks, ranging from supervised to
+      reinforcement learning, with an emphasis on the datasets used. We investigate themes of dataset construction, data
+      modality and annotation, and evaluation of the resulting models. Based on these themes, we categorize research into
+      three groups: dataset design, dataset construction and evaluation. We find four main methods for constructing fixed
+      spatial annotations: rules and templates, LLM prompting, procedural generation, and human-in-the-loop. We also observe
+      substantial variation in evaluation approaches, including different scoring methods, tolerance metrics, and benchmark
+      types. Finally, we identify opportunities for future research in unified dynamic annotation, efficient spatial
+      reasoning, standardization of evaluation, expanded spatial range, and human-centered spatial interactions.
     pdf: https://arxiv.org/pdf/2610.19108
     code: https://github.com/Masoudjafaripour/Multimodal_Datasets_Generative_Reasoning
 
@@ -22,6 +52,17 @@ main:
     image: assets/img/pubs/ijcai2025-llm-vlm-rl-survey.png
     authors: Sheila Schoepp, <strong>Masoud Jafaripour*</strong>, Yingyue Cao*, Tianpei Yang, Fatemeh Abdollahi, Shadan Golestan, Zahin Sufiyan, Osmar R. Zaiane, Matthew E. Taylor (*Equal contribution)
     conference: International Joint Conference on Artificial Intelligence <strong>(IJCAI)</strong>, 2025, Montreal, Canada
+    abstract: >-
+      Reinforcement learning (RL) has shown impressive results in sequential decision-making tasks. Meanwhile, Large
+      Language Models (LLMs) and Vision-Language Models (VLMs) have emerged, exhibiting impressive capabilities in
+      multimodal understanding and reasoning. These advances have led to a surge of research integrating LLMs and VLMs into
+      RL. In this survey, we review representative works in which LLMs and VLMs are used to overcome key challenges in RL,
+      such as lack of prior knowledge, long-horizon planning, and reward design. We present a taxonomy that categorizes
+      these LLM/VLM-assisted RL approaches into three roles: agent, planner, and reward. We conclude by exploring open
+      problems, including grounding, bias mitigation, improved representations, and action advice. By consolidating
+      existing research and identifying future directions, this survey establishes a framework for integrating LLMs and
+      VLMs into RL, advancing approaches that unify natural language and visual understanding with sequential
+      decision-making.
     pdf: https://arxiv.org/pdf/2502.15214
     code: https://github.com/Masoudjafaripour/FM_RL_Survey
     notes: 19.6% acceptance rate
@@ -31,6 +72,20 @@ main:
     image: assets/img/pubs/aaai2025-aifp.png
     authors: <strong>Masoud Jafaripour</strong>, Shadan Golestan, Shotaro Miwa, Yoshihiro Mitsuka, Osmar R. Zaiane
     conference: LM4Plan Workshop @ AAAI Conference on Artificial Intelligence <strong>(AAAI)</strong>, 2025, Philadelphia, USA
+    abstract: >-
+      Planning is essential for agents operating in complex decision-making tasks, particularly in Human-Robot Interaction
+      (HRI) scenarios, which often require adaptability and the ability to navigate dynamic environments. Large Language
+      Models (LLMs), known for their exceptional natural language understanding capabilities, hold promise for enhancing
+      planning in HRI by processing contextual and linguistic cues. However, their effectiveness is limited by inherent
+      shortcomings in spatial reasoning. Existing LLM-based planning frameworks often depend on combining with classical
+      planning methods or struggle to adapt to dynamic environments, limiting their practical applicability. This paper
+      examines whether the incorporation of an environmental feedback mechanism and iterative planning can enhance the
+      planning capabilities of LLMs. Specifically, we propose the "Adaptive Iterative Feedback Prompting" (AIFP) framework
+      for path planning. In AIFP, an LLM generates partial trajectories iteratively, which are evaluated for potential
+      collisions using environmental feedback. Based on the evaluation, AIFP executes the trajectory or re-plans. Our
+      preliminary results show that AIFP increases the success rate of the baseline by 33.3% and generates efficient,
+      appropriately complex paths, making it a promising approach for dynamic HRI scenarios (project webpage at
+      https://github.com/Masoudjafaripour/AIFP).
     pdf: https://openreview.net/pdf?id=M4rLudFbT2
     code: https://github.com/Masoudjafaripour/AIFP
 
@@ -39,4 +94,18 @@ main:
     image: assets/img/pubs/iros2024-fes-exoskeleton.jpg
     authors: <strong>Masoud Jafaripour</strong>, Vivian K. Mushahwar, Mahdi Tavakoli
     conference: IEEE/RSJ International Conference on Intelligent Robots and Systems <strong>(IROS)</strong>, 2024, Abu Dhabi, UAE
+    abstract: >-
+      This paper introduces a novel hybrid torque allocation method for improving wearability and mobility in integrated
+      functional electrical stimulation (FES) of the quadriceps muscles and powered exoskeleton systems. Our proposed
+      approach leverages a hierarchical closed-loop controller for knee joint position tracking while addressing
+      limitations of powered exoskeletons and FES systems by reducing power consumption and battery size and by mitigating
+      FES-induced muscle fatigue, respectively. The core component is a model-free optimization algorithm that dynamically
+      distributes torque between FES and the exoskeleton by considering tracking error, effort, and the prediction of
+      muscle fatigue in the cost function, computing allocation gain in an online manner. The online optimization approach
+      interactively changes the optimal allocation gain by taking into account the instantaneous value of error and effort
+      and also penalizing FES-induced fatigue, a common challenge in long-duration experiments. The results demonstrate
+      that this dynamic allocation significantly improves system wearability by reducing power consumption without
+      increasing muscle fatigue during the extension phase of walking. This hybrid control approach contributes to
+      improving exoskeleton wearability and rehabilitation outcomes for individuals with SCI and mobility impairments,
+      enhancing assistive technology and quality of life.
     pdf: https://www.ece.ualberta.ca/~tbs/pmwiki/pdf/Jafaripour-IROS-2024.pdf
