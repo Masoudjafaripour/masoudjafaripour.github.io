@@ -51,6 +51,13 @@
 
   </head>
   <body>
+    {%- comment %} Top menu, on every page. Add pages here as {title, url}. {% endcomment %}
+    <nav class="site-nav" aria-label="Site">
+      <div class="site-nav-inner">
+        <a class="site-nav-link{% if page.url == '/' or page.url == '/index.html' %} active{% endif %}" href="{{ '/' | relative_url }}">home</a>
+        <a class="site-nav-link{% if page.url contains '/blog' %} active{% endif %}" href="{{ '/blog/' | relative_url }}">blog</a>
+      </div>
+    </nav>
     <div class="wrapper">
       <header>
         
