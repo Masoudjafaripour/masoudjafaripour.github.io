@@ -1,4 +1,4 @@
-# Fields: org, role, focus, time, logo (image path), icon (Font Awesome 6 class, used when no logo), link.
+# Fields: org, role, focus (one line) or bullets (a list; an item can be {text, sub: [...]} for nested points), time, logo (image path), icon (Font Awesome 6 class, used when no logo), link.
 # Set divider: true on an entry to draw a line above it.
 - org: Electronic Arts (EA)
   role: Research Scientist Intern
@@ -9,35 +9,47 @@
 
 - org: Computing Science, University of Alberta
   role: Research Assistant
-  focus: Implicit world modeling and spatial-action reasoning in VLAs, inference-time scaling in multimodal LMs
+  bullets:
+    - Implicit world modeling &amp; fast spatial-action reasoning in VLAs by memory retrieval &amp; token compression.
+    - Efficient inference-time scaling &amp; visual thinking in autoregressive multimodal LMs to enhance reasoning.
+    - text: Building VQA datasets for SFT/RL fine-tuning &amp; on-policy distillation of multimodal LLMs for reasoning.
+      sub:
+        - Mentored writing a related survey &ndash; see <a href="#publications">Publications</a>.
+    - Developed a self-refining LLM-agent framework using few-shot ICL for dynamic planning.
   time: 06/24 &ndash; Now
   logo: assets/img/logos/ualberta.png
   link: https://www.ualberta.ca/en/computing-science/
 
 - org: Vector Institute
   role: Teaching Assistant
-  focus: Multimodal LLM Bootcamp, guiding teams building multimodal pipelines
+  bullets:
+    - Instructed and guided research on multimodal LLMs across healthcare, biology, &amp; finance (<a href="https://github.com/Masoudjafaripour/multimodal_llms_applications" rel="noopener">similar examples</a>).
+    - Facilitated teams in developing and deploying multimodal AI pipelines for document processing, tabular-image learning, text-to-SQL, visual RAG, and video-audio summarization.
   time: 08/25 &ndash; 12/25
   logo: assets/img/logos/vector.png
   link: https://vectorinstitute.ai/
 
 - org: Amii (Alberta Machine Intelligence Institute)
   role: Work Integrated Learning
-  focus: Multimodal pipelines for real/fake image detection, AI ethics workshops
+  bullets:
+    - Validated multimodal ML pipelines for real/fake ID detection, image classification, and information extraction.
+    - Facilitated AI ethics workshops, supporting responsible AI development and practical applications.
   time: 08/25 &ndash; 03/26
   logo: assets/img/logos/amii.png
   link: https://www.amii.ca/
 
 - org: Stanford NLP Group
   role: NLP Researcher, remote
-  focus: LLM uncertainty estimation via contrastive prompting and graph-based confidence mapping
+  bullets:
+    - Improved LLM uncertainty estimation (&uarr;5%) through contrastive prompting &amp; graph-based confidence mapping, and curated a dataset spanning CommonsenseQA, MMLU, and TriviaQA &ndash; coordinated by Chenglei&nbsp;Si.
   time: 01/25 &ndash; 05/25
   logo: assets/img/logos/stanford.png
   link: https://nlp.stanford.edu/
 
 - org: iSMART &amp; ECE, University of Alberta
   role: Research Assistant
-  focus: Real-time torque optimization and deep RL control for robotic exoskeletons
+  bullets:
+    - Developed real-time torque optimization &amp; deep RL control for H3 &amp; Indego robotic exoskeletons (<a href="#publications">IROS&nbsp;&rsquo;24</a>).
   time: 09/22 &ndash; 06/24
   logo: assets/img/logos/ismart.png
   link: https://smartinstitute.ca/

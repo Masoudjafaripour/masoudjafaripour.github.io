@@ -279,6 +279,25 @@ hr.section-divider {
   margin-top: 3px;
   font-size: 14.5px;
   color: var(--site-muted);
+  text-align: justify;
+}
+
+.experience-bullets {
+  margin: 3px 0 0;
+  padding-left: 18px;
+  font-size: 14.5px;
+  color: var(--site-muted);
+}
+
+.experience-bullets li {
+  margin: 1px 0;
+  text-align: justify;
+}
+
+.experience-bullets ul {
+  margin: 1px 0 0;
+  padding-left: 18px;
+  list-style-type: circle;
 }
 
 .experience-time {
