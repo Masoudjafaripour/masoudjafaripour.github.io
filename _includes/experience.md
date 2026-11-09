@@ -1,4 +1,4 @@
-<h2 id="research-experience">Research Experience</h2>
+<h2 id="selected-experience">Selected Experience</h2>
 
 <div class="experience-list">
 {%- for job in site.data.experience %}
