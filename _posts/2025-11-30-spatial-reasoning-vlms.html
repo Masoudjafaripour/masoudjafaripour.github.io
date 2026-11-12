@@ -1,0 +1,162 @@
+---
+layout: post
+title: Spatial Reasoning in VLMs and Multimodal LLMs
+description: Why vision-language models see scenes as labels rather than space, and five families of methods that make spatial structure first-class, from data and architecture to inference, benchmarks, and embodiment.
+permalink: /blog/spatial-reasoning-vlms/
+---
+{% raw %}
+<h3>What is spatial reasoning?</h3>
+
+<p>Spatial reasoning is the ability to understand, manipulate, and infer relationships between objects, and between objects and oneself, within a space: where things are, how they relate (above/below, left/right, near/far), and how they would move or transform. For VLMs and multimodal LLMs, it means reasoning about geometry, position, and relations in visual scenes, beyond recognizing objects or matching text to images.</p>
+
+<p>D. Liu et al. <a class="cite" href="#ref-1">[1]</a> make this precise with a three-level hierarchy inspired by human spatial cognition (Figure 1):</p>
+
+<ul>
+  <li><strong>L1, Perception:</strong> intrinsic attributes of single objects, such as 3D extent, orientation, and depth.</li>
+  <li><strong>L2, Understanding:</strong> relations among objects, such as relative position, metric distance, and spatial grounding ("the dog on the left").</li>
+  <li><strong>L3, Extrapolation:</strong> states that are not directly visible, such as occlusion, mental rotation, manipulation outcomes, perspective-taking, and path planning.</li>
+</ul>
+
+<figure class="post-figure">
+  <img src="/assets/img/blog/spatial-reasoning-vlms/deconstructing-hierarchy.jpg" alt="Three levels of spatial intelligence: perception, understanding, and extrapolation, with example tasks" loading="lazy" />
+  <figcaption><strong>Figure 1.</strong> A three-level hierarchy of spatial intelligence, from perceiving single objects to inferring unseen states and planning. Reproduced from D. Liu et al. <a class="cite" href="#ref-1">[1]</a>, Fig. 2.</figcaption>
+</figure>
+
+<p>Other surveys add complementary axes, notably the frame of reference (egocentric versus allocentric) and qualitative versus quantitative relations <a class="cite" href="#ref-2">[2]</a>, <a class="cite" href="#ref-3">[3]</a>.</p>
+
+<h3>Why VLMs struggle with space</h3>
+
+<p>The mechanisms that give VLMs strong semantics (pooling, feature aggregation, and global attention) also compress or blur spatial structure: they boost semantics but weaken fine-grained geometry (see my <a href="https://x.com/mjafaripoor110/status/1994851940883448150">post on X</a>). D. Liu et al. <a class="cite" href="#ref-1">[1]</a> trace this to four root causes:</p>
+
+<ul>
+  <li><strong>Semantic vision encoders.</strong> CLIP-style encoders learn <em>what</em> objects are and favor global semantics over precise layout.</li>
+  <li><strong>Weak positional signal.</strong> Positional embeddings are often suboptimal or drowned out during attention, so spatial order fades.</li>
+  <li><strong>Coarse modality alignment.</strong> Contrastive, caption-level training aligns global features, producing "bag-of-concepts" behavior, and models fall back on language co-occurrence instead of visual structure.</li>
+  <li><strong>Scarce spatial data.</strong> Captions describe <em>what</em>, rarely <em>where</em>; in spatial datasets the top 17% of relation types cover over 90% of examples, and most data are single-view 2D images without depth or multiple views.</li>
+</ul>
+
+<p>W. Liu et al. <a class="cite" href="#ref-2">[2]</a> summarize the result as a <em>representation-level grounding problem</em>: the model must connect discrete token statistics to continuous geometry (Figure 2).</p>
+
+<figure class="post-figure">
+  <img src="/assets/img/blog/spatial-reasoning-vlms/survey-mismatch.jpg" alt="Real-world coordinates versus LLM tokens: the representation-level grounding problem" loading="lazy" />
+  <figcaption><strong>Figure 2.</strong> The representational mismatch between continuous geometry and discrete tokens. Reproduced from W. Liu et al. <a class="cite" href="#ref-2">[2]</a>, Fig. 1(b).</figcaption>
+</figure>
+
+<p>The positional problem has a simple source. Without positional encodings, self-attention is permutation-equivariant: for any permutation matrix \(P\),</p>
+
+\[
+\operatorname{Attn}(PX) = P\,\operatorname{Attn}(X), \qquad \operatorname{Attn}(X) = \operatorname{softmax}\!\left(\frac{XW_Q (XW_K)^{\top}}{\sqrt{d}}\right) XW_V,
+\]
+
+<p>so order is visible only through positional encodings. With rotary embeddings (RoPE) <a class="cite" href="#ref-4">[4]</a>, the score between a query at position \(m\) and a key at position \(n\) depends on position only through a relative rotation,</p>
+
+\[
+\big(R_{\Theta,m}\, q_m\big)^{\top}\big(R_{\Theta,n}\, k_n\big) = q_m^{\top} R_{\Theta,\,n-m}\, k_n ,
+\]
+
+<p>a signal that is easily dominated when token magnitudes are large. Qi et al. <a class="cite" href="#ref-5">[5]</a> show exactly this in LLaVA-1.5: randomly permuting the vision tokens barely changes the model's description (Figure 3), a "bag-of-tokens" behavior. They trace it to vision embeddings whose norms are one to two orders of magnitude larger than text embeddings, which suppresses positional sensitivity.</p>
+
+<figure class="post-figure">
+  <img src="/assets/img/blog/spatial-reasoning-vlms/bs-permutation.jpg" alt="LLaVA describes an image almost identically when its vision tokens are randomly permuted" loading="lazy" />
+  <figcaption><strong>Figure 3.</strong> Permutation test: shuffling vision tokens leaves the answer almost unchanged. Reproduced from Qi et al. <a class="cite" href="#ref-5">[5]</a>, Fig. 1.</figcaption>
+</figure>
+
+<p>In short, today's VLMs see scenes as <em>labels</em>, not as <em>space</em>.</p>
+
+<h3>How to make them better</h3>
+
+<p>Approaches fall into five families, which closely match the intervention-based taxonomy of D. Liu et al. <a class="cite" href="#ref-1">[1]</a> (prompting, model-centric changes, explicit 2D cues, 3D enrichment, and data): better spatial data, architectures that keep geometry, better inference, targeted benchmarks, and embodied grounding. Figure 4 summarizes the training-based side.</p>
+
+<figure class="post-figure">
+  <img src="/assets/img/blog/spatial-reasoning-vlms/survey-training.jpg" alt="Training-based methods: spatial modules and 3D encoders, synthetic simulators, and reward-based refinement" loading="lazy" />
+  <figcaption><strong>Figure 4.</strong> Training-based methods: geometric priors via spatial modules, synthetic environments for spatial QA, and RL-style refinement of reasoning. Reproduced from W. Liu et al. <a class="cite" href="#ref-2">[2]</a>, Fig. 6.</figcaption>
+</figure>
+
+<h3>1. Data-centric: explicit spatial supervision</h3>
+
+<p>Generate large-scale spatial VQA from images with 3D cues (depth, point clouds, multiple views). SpatialVLM <a class="cite" href="#ref-6">[6]</a> builds an automatic pipeline that scales to about 2 billion metric spatial VQA pairs on 10 million real images (Figure 5): filter scene-level images, extract objects with captioning, segmentation, and metric depth, lift them to 3D, and synthesize questions from the recovered geometry. Lifting uses the pinhole camera model, where a pixel \((u, v)\) with metric depth \(d(u, v)\) and intrinsics \(K\) maps to</p>
+
+\[
+\mathbf{p} = d(u, v)\, K^{-1} \begin{bmatrix} u & v & 1 \end{bmatrix}^{\top},
+\]
+
+<p>so an answer such as "how far is A from B?" can be read off as \(\lVert \mathbf{c}_A - \mathbf{c}_B \rVert_2\) between object centroids. Training on such data improves both qualitative and quantitative spatial VQA.</p>
+
+<figure class="post-figure">
+  <img src="/assets/img/blog/spatial-reasoning-vlms/svlm-pipeline.jpg" alt="SpatialVLM data pipeline: semantic filtering, 2D context extraction, lifting to 3D, ambiguity resolution, QA synthesis" loading="lazy" />
+  <figcaption><strong>Figure 5.</strong> Spatial VQA synthesis from internet images. Reproduced from Chen et al. <a class="cite" href="#ref-6">[6]</a>, Fig. 2.</figcaption>
+</figure>
+
+<p>Data remains the bottleneck: the largest spatial corpora hold millions of examples, orders of magnitude below the billion-scale data used to pretrain foundation models, and they skew toward perception and relations rather than extrapolation <a class="cite" href="#ref-1">[1]</a>.</p>
+
+<h3>2. Architecture and features: make space first-class</h3>
+
+<p>Change what the language model receives so spatial cues survive: preserve positional signals, use feature-preserving connectors, add region, depth, or 3D scene-graph modules, or fuse multiple views. Following their diagnosis, Qi et al. <a class="cite" href="#ref-5">[5]</a> apply two minimal interventions to LLaVA-1.5. First, RMS-normalize the projected vision embeddings to the scale of text tokens,</p>
+
+\[
+\tilde{\mathbf{v}} = \frac{\mathbf{v}}{\operatorname{RMS}(\mathbf{v})}, \qquad \operatorname{RMS}(\mathbf{v}) = \sqrt{\tfrac{1}{d}\textstyle\sum_{i=1}^{d} v_i^2},
+\]
+
+<p>and second, add mid-layer vision-encoder features, which carry more spatial detail than the final layer. Normalization alone raises their position-sensitivity index on CV-Bench 2D from 0.57% to 11.31%.</p>
+
+<h3>3. Reasoning-time methods: better inference</h3>
+
+<p>Without retraining, decompose spatial questions into steps with chain-of-thought (CoT), build explicit intermediate representations such as scene graphs, or search at test time (Figure 6). Self-consistency <a class="cite" href="#ref-7">[7]</a>, for example, samples \(K\) reasoning paths and takes a majority vote,</p>
+
+\[
+\hat{a} = \arg\max_{a} \sum_{k=1}^{K} \mathbb{1}\left[a_k = a\right].
+\]
+
+<p>Ji et al. <a class="cite" href="#ref-8">[8]</a> find that simple CoT can even hurt, while scene-graph CoT helps. They also fine-tune with GRPO (see my <a href="/blog/fine-tuning-scaling-laws/">post on fine-tuning</a> for its objective) and show that, unlike SFT, which overfits to surface phrasing (for example, "closer to" versus "farther from"), GRPO generalizes more reliably out of distribution.</p>
+
+<figure class="post-figure">
+  <img src="/assets/img/blog/spatial-reasoning-vlms/survey-reasoning.jpg" alt="Inference-based methods: chain, tree, and visualization of thought, and explicit scene-graph representations" loading="lazy" />
+  <figcaption><strong>Figure 6.</strong> Inference-based methods: structured prompting (left) and explicit spatial representations such as scene graphs (right). Reproduced from W. Liu et al. <a class="cite" href="#ref-2">[2]</a>, Fig. 7.</figcaption>
+</figure>
+
+<h3>4. Evaluation and diagnostics: targeted benchmarks</h3>
+
+<p>General VQA benchmarks mix spatial reasoning with detection and semantics. Purpose-built benchmarks isolate it: left/right, above/below, metric distance, and egocentric versus allocentric frames. Mind the Gap <a class="cite" href="#ref-9">[9]</a> separates four components (spatial relations, orientation and navigation, mental rotation, and spatial visualization) and evaluates 13 state-of-the-art VLMs on synthetic and real images. Their average accuracy is close to random chance (Figure 7 shows mental-rotation examples).</p>
+
+<figure class="post-figure">
+  <img src="/assets/img/blog/spatial-reasoning-vlms/mtg-examples.jpg" alt="Generated images with questions about which direction an object will face after turning" loading="lazy" />
+  <figcaption><strong>Figure 7.</strong> Example image&ndash;question pairs from the mental-rotation evaluation. Reproduced from Stogiannidis et al. <a class="cite" href="#ref-9">[9]</a>, Fig. 6.</figcaption>
+</figure>
+
+<p>At larger scale, D. Liu et al. <a class="cite" href="#ref-1">[1]</a> evaluate 37 models (commercial, open-source, and spatially specialized) on 9 benchmarks grouped by cognitive level. Four findings stand out:</p>
+
+<ul>
+  <li><strong>Uneven abilities.</strong> Models do best on Understanding, worse on Perception, and worst on Extrapolation.</li>
+  <li><strong>Benchmark bias.</strong> Relation-focused benchmarks (for example, CV-Bench and What's Up) underrepresent metric and object-centric questions, which inflates apparent performance.</li>
+  <li><strong>No universal fix.</strong> Prompting helps perception and understanding but hurts extrapolation, where extra cues become distractors; data-centric training helps extrapolation slightly.</li>
+  <li><strong>Weak generalization.</strong> Methods that inject explicit 2D or 3D information often underperform general-purpose VLMs outside the settings they were designed for.</li>
+</ul>
+
+<h3>5. Embodied and 3D grounding: close the loop</h3>
+
+<p>Tie VLMs to real 3D geometry and actions (robotics, interactive environments, multi-view scenes) so that spatial reasoning becomes physically grounded. SpatialRGPT <a class="cite" href="#ref-10">[10]</a> learns region-level representations from automatically built 3D scene graphs and adds a plugin that feeds relative depth through the same visual encoder, with separate RGB and depth connectors (Figure 8). Given region prompts, it answers relative direction and metric distance questions, and its distance estimates serve as dense rewards for robot manipulation.</p>
+
+<figure class="post-figure">
+  <img src="/assets/img/blog/spatial-reasoning-vlms/rgpt-arch.jpg" alt="SpatialRGPT architecture with region feature extractor and RGB and depth connectors" loading="lazy" />
+  <figcaption><strong>Figure 8.</strong> Region-aware architecture with a depth plugin. Reproduced from Cheng et al. <a class="cite" href="#ref-10">[10]</a>, Fig. 3.</figcaption>
+</figure>
+
+<h3>Takeaway</h3>
+
+<p>Spatial reasoning fails for structural reasons (semantic encoders, suppressed positional signal, coarse alignment, and scarce 3D-aware data) rather than for lack of scale alone. Two open problems stand out <a class="cite" href="#ref-1">[1]</a>: balancing holistic semantics against fine-grained geometry without losing zero-shot generality, and resolving referential ambiguity, since the same question can have different answers from egocentric and allocentric viewpoints. The most promising directions combine the five families: spatially rich data, representations that keep geometry, inference that builds explicit structure, broader evaluation across cognitive levels, and grounding in 3D and action.</p>
+
+<h3>References</h3>
+
+<ol class="post-refs">
+  <li id="ref-1">D. Liu, T. Liang, Z. Hu, J. Peng, et al. <a href="https://doi.org/10.36227/techrxiv.176231405.57942913/v1">Deconstructing Spatial Intelligence in Vision-Language Models</a>. TechRxiv, 2025.</li>
+  <li id="ref-2">W. Liu, Q. Xue, H. Wang, X. Yin, et al. <a href="https://arxiv.org/abs/2511.15722">Spatial Reasoning in Multimodal Large Language Models: A Survey of Tasks, Benchmarks and Methods</a>. arXiv:2511.15722, 2025.</li>
+  <li id="ref-3">X. Zheng, Z. Dongfang, L. Jiang, B. Zheng, et al. <a href="https://arxiv.org/abs/2510.25760">Multimodal Spatial Reasoning in the Large Model Era: A Survey and Benchmarks</a>. arXiv:2510.25760, 2025.</li>
+  <li id="ref-4">J. Su, Y. Lu, S. Pan, et al. <a href="https://arxiv.org/abs/2104.09864">RoFormer: Enhanced Transformer with Rotary Position Embedding</a>. Neurocomputing, 2024.</li>
+  <li id="ref-5">J. Qi, J. Liu, H. Tang, Z. Zhu. <a href="https://arxiv.org/abs/2503.17349">Beyond Semantics: Rediscovering Spatial Awareness in Vision-Language Models</a>. arXiv:2503.17349, 2025.</li>
+  <li id="ref-6">B. Chen, Z. Xu, S. Kirmani, B. Ichter, et al. <a href="https://openaccess.thecvf.com/content/CVPR2024/html/Chen_SpatialVLM_Endowing_Vision-Language_Models_with_Spatial_Reasoning_Capabilities_CVPR_2024_paper.html">SpatialVLM: Endowing Vision-Language Models with Spatial Reasoning Capabilities</a>. CVPR, 2024.</li>
+  <li id="ref-7">X. Wang, J. Wei, D. Schuurmans, et al. <a href="https://arxiv.org/abs/2203.11171">Self-Consistency Improves Chain of Thought Reasoning in Language Models</a>. ICLR, 2023.</li>
+  <li id="ref-8">B. Ji, S. Agrawal, Q. Tang, Y. Wu, et al. <a href="https://arxiv.org/abs/2507.13362">Enhancing Spatial Reasoning in Vision-Language Models via Chain-of-Thought Prompting and Reinforcement Learning</a>. arXiv:2507.13362, 2025.</li>
+  <li id="ref-9">I. Stogiannidis, S. McDonagh, S. A. Tsaftaris. <a href="https://arxiv.org/abs/2503.19707">Mind the Gap: Benchmarking Spatial Reasoning in Vision-Language Models</a>. arXiv:2503.19707, 2025.</li>
+  <li id="ref-10">A.-C. Cheng, H. Yin, Y. Fu, Q. Guo, et al. <a href="https://neurips.cc/virtual/2024/poster/95720">SpatialRGPT: Grounded Spatial Reasoning in Vision-Language Models</a>. NeurIPS, 2024.</li>
+</ol>
+{% endraw %}
