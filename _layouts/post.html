@@ -1,0 +1,23 @@
+---
+layout: homepage
+---
+{%- comment -%}
+  Blog post page. Posts live in _posts/ as YYYY-MM-DD-slug.html (HTML, so Markdown cannot mangle the math) with front matter
+  title, description (shown on the blog list), and permalink. Math is written as
+  \( inline \) and \[ display \] and rendered by MathJax.
+{%- endcomment -%}
+<article class="post">
+  <a class="back-link" href="{{ '/blog/' | relative_url }}"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> All posts</a>
+
+  <h1 class="post-title">{{ page.title }}</h1>
+  <div class="post-meta">{{ page.date | date: "%B %-d, %Y" }}</div>
+
+  <div class="post-body">
+{{ content }}
+  </div>
+</article>
+
+<script>
+  window.MathJax = { tex: { inlineMath: [["\\(", "\\)"]], displayMath: [["\\[", "\\]"]] }, svg: { fontCache: "global" } };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js" async></script>

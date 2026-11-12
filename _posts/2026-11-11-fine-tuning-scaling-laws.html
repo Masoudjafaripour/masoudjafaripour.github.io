@@ -1,0 +1,124 @@
+---
+layout: post
+title: Fine-Tuning and Scaling Laws for Spatial Reasoning in Multimodal LLMs
+description: How supervised, parameter-efficient, and RL fine-tuning scale, and what that implies for teaching multimodal LLMs spatial reasoning under limited data and compute.
+permalink: /blog/fine-tuning-scaling-laws/
+---
+{% raw %}
+<p>Before turning to test-time scaling, I study how post-training scales: supervised fine-tuning (SFT) and reinforcement-learning fine-tuning (RLFT) as ways to improve spatial reasoning in multimodal LLMs. The question is how each method affects spatial reasoning, scene understanding, and action-grounded inference in embodied, human-centered settings, and what that means when data and compute are limited.</p>
+
+<h3>1. Scaling as the foundation</h3>
+
+<p>Kaplan et al. <a class="cite" href="#ref-1">[1]</a> showed that language-model test loss falls as a power law in model size \(N\), dataset size \(D\), and compute \(C\), as long as the other two factors are not the bottleneck (Figure 1):</p>
+
+\[
+L(N) = \left(\frac{N_c}{N}\right)^{\alpha_N}, \qquad
+L(D) = \left(\frac{D_c}{D}\right)^{\alpha_D}, \qquad
+L(C_{\min}) = \left(\frac{C_c}{C_{\min}}\right)^{\alpha_C},
+\]
+
+<p>with fitted exponents \(\alpha_N \approx 0.076\), \(\alpha_D \approx 0.095\), and \(\alpha_C \approx 0.050\). This predictability in pretraining is the starting point for asking whether post-training follows similar laws, especially for tasks that need 3D spatial understanding.</p>
+
+<figure class="post-figure">
+  <img src="/assets/img/blog/fine-tuning-scaling/kaplan-fig1.png" alt="Test loss versus compute, dataset size, and parameters, each following a power law" loading="lazy" />
+  <figcaption><strong>Figure 1.</strong> Test loss improves as a smooth power law in compute, data, and parameters. Reproduced from Kaplan et al. <a class="cite" href="#ref-1">[1]</a>, Fig. 1.</figcaption>
+</figure>
+
+<h3>2. Scaling of SFT and parameter-efficient fine-tuning</h3>
+
+<p>Zhang et al. <a class="cite" href="#ref-2">[2]</a> found that LLM fine-tuning follows a multiplicative joint scaling law between the fine-tuning data size \(D_f\) and each other scaling factor \(X\) (model size, pretraining data, or the number of parameter-efficient tuning parameters; Figure 2):</p>
+
+\[
+\hat{L}(X, D_f) = A \cdot \frac{1}{X^{\alpha}} \cdot \frac{1}{D_f^{\beta}} + E,
+\]
+
+<p>where \(A, E, \alpha, \beta\) are fitted per task and \(E\) is the irreducible loss. Three findings matter here: fine-tuning benefits more from a larger model than from more pretraining data; adding parameters to LoRA or prompt tuning scales poorly; and the best fine-tuning method depends on the task and on how much fine-tuning data there is. Even without retraining the full model, fine-tuning gains are measurable and predictable.</p>
+
+<figure class="post-figure">
+  <img src="/assets/img/blog/fine-tuning-scaling/zhang-iclr24-fig1.png" alt="Fitted scaling curves for full fine-tuning, prompt tuning, and LoRA as fine-tuning data grows" loading="lazy" />
+  <figcaption><strong>Figure 2.</strong> Fine-tuning data scaling for full-model tuning (FMT), prompt tuning, and LoRA across model sizes. Reproduced from Zhang et al. <a class="cite" href="#ref-2">[2]</a>, Fig. 1.</figcaption>
+</figure>
+
+<h3>3. Extending fine-tuning scaling to multimodal models</h3>
+
+<p>For multimodal LLMs, Zhang et al. <a class="cite" href="#ref-3">[3]</a> model downstream performance \(P\) jointly in model size, LLM pretraining tokens, and multimodal SFT tokens:</p>
+
+\[
+P = A - \frac{B}{N^{\alpha}} - \frac{C}{D_{\text{pretrain}}^{\beta}} - \frac{E}{D_{\text{SFT}}^{\gamma}}.
+\]
+
+<p>Fitted on 60 models from 50M to 8B parameters, the law shows SFT gains flattening (Figure 3) as \(D_{\text{SFT}}\) grows, with every model size except 7B showing signs of overtraining in the SFT stage. The compute-optimal SFT data grows almost linearly with pretraining data, \(D_{\text{SFT}} \approx 0.48\, D_{\text{pretrain}}^{0.98}\), and training loss predicts downstream accuracy closely (\(R^2 = 0.98\)). Aligning vision and language therefore needs far more supervision than text-only fine-tuning to reach the same point on the curve.</p>
+
+<figure class="post-figure">
+  <img src="/assets/img/blog/fine-tuning-scaling/zhang-acl26-fig1.png" alt="Average accuracy versus multimodal SFT data for models from 0.05B to 7B parameters" loading="lazy" />
+  <figcaption><strong>Figure 3.</strong> Multimodal SFT performance versus SFT data, by model size. Reproduced from Zhang et al. <a class="cite" href="#ref-3">[3]</a>, Fig. 1.</figcaption>
+</figure>
+
+<p>My work builds on this to study <strong>spatially grounded multimodal fine-tuning</strong>, where the goal is not only alignment but the emergence of structured 3D reasoning (object relations, geometry, and spatial planning) under constrained data and compute.</p>
+
+<h3>4. Scaling of RL fine-tuning</h3>
+
+<p>RL fine-tuning also scales predictably, but with a different shape. Khatri et al. <a class="cite" href="#ref-4">[4]</a> fit validation reward \(R_C\) as a sigmoid in training compute \(C\):</p>
+
+\[
+R_C - R_0 = \frac{A - R_0}{1 + \left(C_{\text{mid}} / C\right)^{B}},
+\]
+
+<p>where \(R_0\) is the starting reward, \(A\) the asymptotic reward, \(B > 0\) the scaling exponent, and \(C_{\text{mid}}\) the compute at the midpoint of the curve. Unlike the unbounded power laws of SFT, RL gains saturate at \(A\): each extra order of magnitude of GPU hours buys less once reasoning stabilizes. Most recipe choices (loss aggregation, normalization, curriculum) mainly change efficiency (\(B\), \(C_{\text{mid}}\)) rather than the ceiling \(A\), so fits from smaller runs extrapolate reliably (Figure 4). This motivates RLFT for multimodal reasoning, where feedback can refine planning and consistency without growing the supervised dataset.</p>
+
+<figure class="post-figure">
+  <img src="/assets/img/blog/fine-tuning-scaling/khatri-fig1.png" alt="Validation pass rate versus RL compute, fitted with a sigmoid and extrapolated" loading="lazy" />
+  <figcaption><strong>Figure 4.</strong> Sigmoidal scaling of RL compute up to 100k GPU hours. Reproduced from Khatri et al. <a class="cite" href="#ref-4">[4]</a>, Fig. 1.</figcaption>
+</figure>
+
+<h3>5. Practical focus: parameter-efficient tuning under limited compute</h3>
+
+<p>Full multimodal fine-tuning needs data and compute on the scale studied in <a class="cite" href="#ref-3">[3]</a>. I therefore focus on parameter-efficient fine-tuning (LoRA and visual-adapter tuning) and on RLFT. LoRA <a class="cite" href="#ref-5">[5]</a> freezes a pretrained weight \(W_0 \in \mathbb{R}^{d \times k}\) and learns a low-rank update:</p>
+
+\[
+W = W_0 + \Delta W = W_0 + BA, \qquad B \in \mathbb{R}^{d \times r},\; A \in \mathbb{R}^{r \times k},\; r \ll \min(d, k).
+\]
+
+<h3>6. Dataset design</h3>
+
+<p>To support these experiments, I am building a pilot VQA benchmark for multimodal reasoning in embodied, collaborative, dynamic environments:</p>
+
+<ul>
+  <li><strong>Scale:</strong> 5k&ndash;10k RGB images and roughly 25k&ndash;50k question&ndash;answer pairs.</li>
+  <li><strong>Scenes:</strong> 150&ndash;250 kitchen collaboration and multi-agent scenes (handover, cooking, cleaning), each with about 20 images from diverse viewpoints and 5&ndash;8 questions per image.</li>
+  <li><strong>Focus:</strong> spatial reasoning and multimodal alignment rather than surface perception: object relationships, relative positions, affordances, occlusion, and coordinated agent&ndash;object interactions in shared workspaces.</li>
+  <li><strong>Target models:</strong> LLaVA-7B and Qwen2-VL-7B, on tasks that require consistent spatial understanding in human&ndash;robot collaboration.</li>
+</ul>
+
+<h3>7. RL fine-tuning for spatial reasoning</h3>
+
+<p>SFT aligns modalities but depends on large, high-quality datasets, which are scarce for spatial reasoning and human&ndash;robot collaboration. RLFT improves reasoning through feedback instead. Rewards are designed to encourage consistency between the visual context and the predicted spatial actions, to reinforce multi-step reasoning chains, and to penalize ambiguous or physically implausible predictions.</p>
+
+<p>I use two stable formulations. Direct Preference Optimization (DPO) <a class="cite" href="#ref-6">[6]</a> learns from preferred and rejected answers \((y_w, y_l)\) against a frozen reference policy:</p>
+
+\[
+\mathcal{L}_{\text{DPO}} = -\,\mathbb{E}_{(x, y_w, y_l)}\left[\log \sigma\!\left(\beta \log \frac{\pi_\theta(y_w \mid x)}{\pi_{\text{ref}}(y_w \mid x)} - \beta \log \frac{\pi_\theta(y_l \mid x)}{\pi_{\text{ref}}(y_l \mid x)}\right)\right].
+\]
+
+<p>Group Relative Policy Optimization (GRPO) <a class="cite" href="#ref-7">[7]</a> drops the value network and scores each of \(G\) sampled answers relative to its group:</p>
+
+\[
+\hat{A}_i = \frac{r_i - \operatorname{mean}(\{r_1, \dots, r_G\})}{\operatorname{std}(\{r_1, \dots, r_G\})}.
+\]
+
+<p>Together, these let me measure how models refine their reasoning policies and spatial inference without much additional supervision, while keeping training computationally feasible.</p>
+
+<p class="post-note">Results are in progress. Stay tuned.</p>
+
+<h3>References</h3>
+
+<ol class="post-refs">
+  <li id="ref-1">J. Kaplan, S. McCandlish, T. Henighan, et al. <a href="https://arxiv.org/abs/2001.08361">Scaling Laws for Neural Language Models</a>. arXiv:2001.08361, 2020.</li>
+  <li id="ref-2">B. Zhang, Z. Liu, C. Cherry, O. Firat. <a href="https://arxiv.org/abs/2402.17193">When Scaling Meets LLM Finetuning: The Effect of Data, Model and Finetuning Method</a>. ICLR, 2024.</li>
+  <li id="ref-3">Y. Zhang, T. Yu, F. Li, et al. <a href="https://aclanthology.org/2026.acl-long.603/">Scaling Law for Multimodal Large Language Model Supervised Fine-Tuning</a>. ACL, 2026.</li>
+  <li id="ref-4">D. Khatri, L. Madaan, R. Tiwari, et al. <a href="https://arxiv.org/abs/2510.13786">The Art of Scaling Reinforcement Learning Compute for LLMs</a>. arXiv:2510.13786, 2025.</li>
+  <li id="ref-5">E. J. Hu, Y. Shen, P. Wallis, et al. <a href="https://arxiv.org/abs/2106.09685">LoRA: Low-Rank Adaptation of Large Language Models</a>. ICLR, 2022.</li>
+  <li id="ref-6">R. Rafailov, A. Sharma, E. Mitchell, et al. <a href="https://arxiv.org/abs/2305.18290">Direct Preference Optimization: Your Language Model is Secretly a Reward Model</a>. NeurIPS, 2023.</li>
+  <li id="ref-7">Z. Shao, P. Wang, Q. Zhu, et al. <a href="https://arxiv.org/abs/2402.03300">DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models</a>. arXiv:2402.03300, 2024.</li>
+</ol>
+{% endraw %}
